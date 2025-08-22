@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>可排序的目录树</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+  }
+  .tree-list {
+    list-style: none;
+    padding-left: 20px;
+  }
+  .tree-item, .file-item {
+    cursor: pointer;
+    line-height: 2;
+  }
+  .toggle-icon {
+    margin-right: 5px;
+    font-size: 1.2em;
+    font-weight: bold;
+    display: inline-block;
+    width: 15px;
+    text-align: center;
+  }
+  .item-name {
+    margin-left: 5px;
+  }
+  .collapsed > .tree-list, .file-item.collapsed > .file-content {
+    display: none;
+  }
+  .file-content {
+    padding-left: 30px;
+    white-space: pre-wrap;
+    border-left: 1px solid #ccc;
+    margin-left: 10px;
+  }
+  .sort-button {
+    margin: 10px 0;
+    padding: 5px 10px;
+    cursor: pointer;
+  }
+</style>
+</head>
+<body>
+
+<h1>文件目录</h1>
+
+<ul class="tree-list">
+  <li class="tree-item collapsed">
+    <span class="toggle-icon">+</span>
+    <span class="item-name">项目文件夹</span>
+    <ul class="tree-list">
+      <li class="tree-item">
+        <span class="toggle-icon">-</span>
+        <span class="item-name">文档</span>
+        <button class="sort-button" onclick="sortList(this)">按名称排序</button>
+        <ul class="tree-list sortable-list">
+          <li class="file-item collapsed">
+            <span class="toggle-icon">+</span>
+            <span class="item-name">项目计划.xlsx</span>
+            <div class="file-content">
+              这是项目计划文件内容。
+            </div>
+          </li>
+          <li class="file-item collapsed">
+            <span class="toggle-icon">+</span>
+            <span class="item-name">文档2.docx</span>
+            <div class="file-content">
+              这是文档2的内容。
+            </div>
+          </li>
+          <li class="file-item collapsed">
+            <span class="toggle-icon">+</span>
+            <span class="item-name">GitHub Pages 部署步骤</span>
+            <div class="file-content">
+              🔹前提准备
+			  一个 GitHub
+			  账号（免费注册）。
+			  你本地已经有一个网页文件，比如 index.html。
+			  🚀 步骤 1：新建仓库
+			  1.登录 GitHub
+			  2.右上角点 “+” → New repository。
+			  3.输入仓库名（推荐 my-website 或 username.github.io）。
+			  如果你想要 个性主页，必须用格式：你的用户名.github.io。
+			  例：用户名是 xiaoming → 仓库名必须是 xiaoming.github.io。
+			  4.选择 Public（公开）。
+			  5.点击 Create repository。
+			  🚀 步骤 2：上传网页文件
+			  1.在仓库页面里，点 “Add file” → “Upload files”。
+			  2.上传你的网页文件：
+			  至少要有一个 index.html（这是网站默认入口）。
+			  其他的 CSS、图片文件一并上传。
+			  3.点 Commit changes(提交更改) 保存。
+			  🚀 步骤 3：开启 GitHub Pages
+			  1.打开仓库 → 点上方的 Settings。
+			  2.左边菜单找到 Pages。
+			  3.在 Build and deployment → Source 里，选择：
+			  Deploy from branch
+			  分支选 main，文件夹选 / (root)。
+			  4.点 Save。
+			  🚀 步骤 4：等待部署
+			  GitHub 会自动帮你部署，大概需要 1-2 分钟。
+			  部署成功后，页面会显示一个网址，比如：
+			  https://你的用户名.github.io/
+			  打开网址，就能看到你上传的网页啦！ 🎉
+			  🚀 步骤 5（可选）：绑定自己的域名
+			  如果你买了自己的域名，可以在 Pages 设置里添加自定义域名。
+			  GitHub 会自动配置免费 HTTPS。
+			  ✅ 小结
+			  GitHub Pages 免费、永久有效，非常适合小白建 个人主页、说明文档、静态网站。
+			  只要你更新仓库内容，网站就会自动刷新。
+            </div>
+          </li>
+		  <li class="file-item collapsed">
+            <span class="toggle-icon">+</span>
+            <span class="item-name">Google Chrome 多线程下载</span>
+            <div class="file-content">
+              1、双击进入软件，在页面上方地址栏中输入“chrome://flags/#enable-parallel-downloading”并回车访问  flags=旗帜       parallel=平行
+              2、进入新界面后，会看到下方的“parallel downloading”选项右侧的状态为“Default”。
+              3、最后点击选项框右侧的下拉按钮，将其修改成“Enabled”即可开启了。
+			</div>
+        </ul>
+      </li>
+      <li class="tree-item collapsed">
+        <span class="toggle-icon">+</span>
+        <span class="item-name">src</span>
+        <ul class="tree-list">
+          <li>文件1.js</li>
+          <li>文件2.css</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<script>
+  // 切换展开/折叠功能
+  document.addEventListener('DOMContentLoaded', () => {
+    const items = document.querySelectorAll('.tree-item, .file-item');
+
+    items.forEach(item => {
+      const icon = item.querySelector('.toggle-icon');
+      if (icon) {
+        icon.addEventListener('click', (event) => {
+          event.stopPropagation();
+          item.classList.toggle('collapsed');
+          icon.textContent = item.classList.contains('collapsed') ? '+' : '−';
+        });
+      }
+    });
+  });
+
+  // 排序功能
+  function sortList(button) {
+    const list = button.nextElementSibling; // 获取紧随按钮的 ul 列表
+    if (!list) return;
+
+    const listItems = Array.from(list.children);
+
+    listItems.sort((a, b) => {
+      const aName = a.querySelector('.item-name') ? a.querySelector('.item-name').textContent : a.textContent;
+      const bName = b.querySelector('.item-name') ? b.querySelector('.item-name').textContent : b.textContent;
+      return aName.localeCompare(bName, 'zh-CN', {sensitivity: 'base'});
+    });
+
+    listItems.forEach(item => list.appendChild(item));
+  }
+</script>
+
+</body>
+</html>
