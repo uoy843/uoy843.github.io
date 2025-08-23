@@ -1,174 +1,158 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>可排序的目录树</title>
-<style>
-  body {
-    font-family: Arial, sans-serif;
-    line-height: 1.6;
-  }
-  .tree-list {
-    list-style: none;
-    padding-left: 20px;
-  }
-  .tree-item, .file-item {
-    cursor: pointer;
-    line-height: 2;
-  }
-  .toggle-icon {
-    margin-right: 5px;
-    font-size: 1.2em;
-    font-weight: bold;
-    display: inline-block;
-    width: 15px;
-    text-align: center;
-  }
-  .item-name {
-    margin-left: 5px;
-  }
-  .collapsed > .tree-list, .file-item.collapsed > .file-content {
-    display: none;
-  }
-  .file-content {
-    padding-left: 30px;
-    white-space: pre-wrap;
-    border-left: 1px solid #ccc;
-    margin-left: 10px;
-  }
-  .sort-button {
-    margin: 10px 0;
-    padding: 5px 10px;
-    cursor: pointer;
-  }
-</style>
+  <meta charset="UTF-8">
+  <title>文件目录树 + 内嵌预览</title>
+  <style>
+    body { font-family: Arial, sans-serif; }
+    ul { list-style: none; padding-left: 20px; }
+    .folder > input, .file > input { display: none; }
+    .folder > ul { display: none; margin-left: 20px; }
+    .folder > input:checked ~ ul { display: block; }
+    .file > .content { display: none; margin-left: 24px; }
+    .file > input:checked ~ .content { display: block; }
+    .node { display: flex; align-items: center; gap: 6px; cursor: pointer; }
+    .name { white-space: nowrap; }
+    svg { width: 14px; height: 14px; flex-shrink: 0; }
+    .chev { transition: transform 0.2s; }
+    .folder > input:checked + label .chev { transform: rotate(90deg); }
+    iframe { width: 90%; height: 400px; border: 1px solid #ccc; margin-top: 5px; }
+  </style>
 </head>
 <body>
+  <ul>
+    <!-- 文件夹 -->
+    <li class="folder">
+      <input id="root" type="checkbox">
+      <label for="root" class="node">
+        <span class="chev"><svg viewBox="0 0 24 24"><path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2" fill="none"/></svg></span>
+        <span class="name">项目文件夹1</span>
+      </label>
+      <ul>
+        <!-- 子文件夹 -->
+        <li class="folder">
+          <input id="docs" type="checkbox">
+          <label for="docs" class="node">
+            <span class="chev"><svg viewBox="0 0 24 24"><path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2" fill="none"/></svg></span>
+            <span class="name">文档 (按名称排序)</span>
+          </label>
+          <ul>
+            <!-- 工作.docx -->
+            <li class="file">
+              <input id="f1" type="checkbox">
+              <label for="f1" class="node">
+                <svg viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" fill="black"/></svg>
+                <span class="name">工作.docx</span>
+              </label>
+              <div class="content">
+                <!-- 方式一：Word 转网页 -->
+                <h3>文档内容：Word 转网页</h3>
+                <iframe src="docs/工作.html" title="工作.docx 转网页"></iframe>
 
-<h1>文件目录</h1>
+                <!-- 方式二：PDF 内嵌 -->
+                <h3>文档内容：PDF 内嵌</h3>
+                <iframe src="docs/工作.pdf" title="工作.docx PDF 预览"></iframe>
 
-<ul class="tree-list">
-  <li class="tree-item collapsed">
-    <span class="toggle-icon">+</span>
-    <span class="item-name">项目文件夹</span>
-    <ul class="tree-list">
-      <li class="tree-item">
-        <span class="toggle-icon">-</span>
-        <span class="item-name">文档</span>
-        <button class="sort-button" onclick="sortList(this)">按名称排序</button>
-        <ul class="tree-list sortable-list">
-          <li class="file-item collapsed">
-            <span class="toggle-icon">+</span>
-            <span class="item-name">项目计划.xlsx</span>
-            <div class="file-content">
-              这是项目计划文件内容。
-            </div>
-          </li>
-          <li class="file-item collapsed">
-            <span class="toggle-icon">+</span>
-            <span class="item-name">文档2.docx</span>
-            <div class="file-content">
-              这是文档2的内容。
-            </div>
-          </li>
-          <li class="file-item collapsed">
-            <span class="toggle-icon">+</span>
-            <span class="item-name">GitHub Pages 部署步骤</span>
-            <div class="file-content">
-              🔹前提准备
-				一个 GitHub
-				 账号（免费注册）。
-				你本地已经有一个网页文件，比如 index.html。
-				🚀 步骤 1：新建仓库
-				1.登录 GitHub
-				2.右上角点 “+” → New repository。
-				3.输入仓库名（推荐 my-website 或 username.github.io）。
-				如果你想要 个性主页，必须用格式：你的用户名.github.io。
-				例：用户名是 xiaoming → 仓库名必须是 xiaoming.github.io。
-				4.选择 Public（公开）。
-				5.点击 Create repository。
-				🚀 步骤 2：上传网页文件
-				1.在仓库页面里，点 “Add file” → “Upload files”。
-				2.上传你的网页文件：
-				至少要有一个 index.html（这是网站默认入口）。
-				其他的 CSS、图片文件一并上传。
-				3.点 Commit changes(提交更改) 保存。
-				🚀 步骤 3：开启 GitHub Pages
-				1.打开仓库 → 点上方的 Settings。
-				2.左边菜单找到 Pages。
-				3.在 Build and deployment → Source 里，选择：
-				Deploy from branch
-				分支选 main，文件夹选 / (root)。
-				4.点 Save。
-				🚀 步骤 4：等待部署
-				GitHub 会自动帮你部署，大概需要 1-2 分钟。
-				部署成功后，页面会显示一个网址，比如：
-				https://你的用户名.github.io/
-				打开网址，就能看到你上传的网页啦！ 🎉
-				🚀 步骤 5（可选）：绑定自己的域名
-				如果你买了自己的域名，可以在 Pages 设置里添加自定义域名。
-				GitHub 会自动配置免费 HTTPS。
-				✅ 小结
-				GitHub Pages 免费、永久有效，非常适合小白建 个人主页、说明文档、静态网站。
-				只要你更新仓库内容，网站就会自动刷新。
-            </div>
-          </li>
-		  <li class="file-item collapsed">
-		    <span class="toggle-icon">+</span>
-            <span class="item-name">Google Chrome 多线程下载</span>
-            <div class="file-content">
-              1、双击进入软件，在页面上方地址栏中输入“chrome://flags/#enable-parallel-downloading”并回车访问  flags=旗帜 parallel=平行    
-              2、进入新界面后，会看到下方的“parallel downloading”选项右侧的状态为“Default”。
-              3、最后点击选项框右侧的下拉按钮，将其修改成“Enabled”即可开启了。
-			</div>
-        </ul>
-      </li>
-      <li class="tree-item collapsed">
-        <span class="toggle-icon">+</span>
-        <span class="item-name">src</span>
-        <ul class="tree-list">
-          <li>文件1.js</li>
-          <li>文件2.css</li>
-        </ul>
-      </li>
-    </ul>
-  </li>
-</ul>
+                <!-- 下载原始 Word 文件 -->
+                <p><a href="docs/工作.docx" download>⬇ 下载 Word 文件</a></p>
+              </div>
+            </li>
 
-<script>
-  // 切换展开/折叠功能
-  document.addEventListener('DOMContentLoaded', () => {
-    const items = document.querySelectorAll('.tree-item, .file-item');
+            <!-- win10怎么找回自带的windows照片查看器.docx -->
+            <li class="file">
+              <input id="f2" type="checkbox">
+              <label for="f2" class="node">
+                <svg viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" fill="black"/></svg>
+                <span class="name">win10怎么找回自带的windows照片查看器.docx</span>
+              </label>
+              <div class="content">
+                <!-- 方式一：Word 转网页 -->
+                <h3>文档内容：Word 转网页</h3>
+                <iframe src="win10怎么找回自带的windows照片查看器.html" title="win10怎么找回自带的windows照片查看器.docx 转网页"></iframe>
 
-    items.forEach(item => {
-      const icon = item.querySelector('.toggle-icon');
-      if (icon) {
-        icon.addEventListener('click', (event) => {
-          event.stopPropagation();
-          item.classList.toggle('collapsed');
-          icon.textContent = item.classList.contains('collapsed') ? '+' : '−';
-        });
-      }
-    });
-  });
+                <!-- 方式二：PDF 内嵌 -->
+                <h3>文档内容：PDF 内嵌</h3>
+                <iframe src="win10怎么找回自带的windows照片查看器.pdf" title="win10怎么找回自带的windows照片查看器.docx PDF 预览"></iframe>
 
-  // 排序功能
-  function sortList(button) {
-    const list = button.nextElementSibling; // 获取紧随按钮的 ul 列表
-    if (!list) return;
+                <!-- 下载原始 Word 文件 -->
+                <p><a href="win10怎么找回自带的windows照片查看器.docx" download>⬇ 下载 Word 文件</a></p>
+              </div>
+            </li>
 
-    const listItems = Array.from(list.children);
+            <!-- 项目计划.xlsx -->
+            <li class="file">
+              <input id="f3" type="checkbox">
+              <label for="f3" class="node">
+                <svg viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" fill="black"/></svg>
+                <span class="name">项目计划.xlsx</span>
+              </label>
+              <div class="content">
+                <!-- 方式一：Word 转网页 -->
+                <h3>文档内容：Word 转网页</h3>
+                <iframe src="docs/项目计划.html" title="项目计划.xlsx 转网页"></iframe>
 
-    listItems.sort((a, b) => {
-      const aName = a.querySelector('.item-name') ? a.querySelector('.item-name').textContent : a.textContent;
-      const bName = b.querySelector('.item-name') ? b.querySelector('.item-name').textContent : b.textContent;
-      return aName.localeCompare(bName, 'zh-CN', {sensitivity: 'base'});
-    });
+                <!-- 方式二：PDF 内嵌 -->
+                <h3>文档内容：PDF 内嵌</h3>
+                <iframe src="docs/项目计划.pdf" title="项目计划.xlsx PDF 预览"></iframe>
 
-    listItems.forEach(item => list.appendChild(item));
-  }
-</script>
+                <!-- 下载原始 Excel 文件 -->
+                <p><a href="docs/项目计划.xlsx" download>⬇ 下载 Excel 文件</a></p>
+              </div>
+            </li>
 
+            <!-- GitHub Pages 部署步骤（纯文本） -->
+            <li class="file">
+              <input id="f4" type="checkbox">
+              <label for="f4" class="node">
+                <svg viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" fill="black"/></svg>
+                <span class="name">GitHub Pages 部署步骤</span>
+              </label>
+              <div class="content">
+                <pre>
+                🔹前提准备
+                一个 GitHub
+                账号（免费注册）。
+                你本地已经有一个网页文件，比如 index.html。
+                🚀 步骤 1：新建仓库
+                1.登录 GitHub
+                2.右上角点 “+” → New repository。
+                3.输入仓库名（推荐 my-website 或 username.github.io）。
+                如果你想要 个性主页，必须用格式：你的用户名.github.io。
+                例：用户名是 xiaoming → 仓库名必须是 xiaoming.github.io。
+                4.选择 Public（公开）。
+                5.点击 Create repository。
+                🚀 步骤 2：上传网页文件
+                1.在仓库页面里，点 “Add file” → “Upload files”。
+                2.上传你的网页文件：
+                至少要有一个 index.html（这是网站默认入口）。
+                其他的 CSS、图片文件一并上传。
+                3.点 Commit changes(提交更改) 保存。
+                🚀 步骤 3：开启 GitHub Pages
+                1.打开仓库 → 点上方的 Settings。
+                2.左边菜单找到 Pages。
+                3.在 Build and deployment → Source 里，选择：
+                Deploy from branch
+                分支选 main，文件夹选 / (root)。
+                4.点 Save。
+                🚀 步骤 4：等待部署
+                GitHub 会自动帮你部署，大概需要 1-2 分钟。
+                部署成功后，页面会显示一个网址，比如：
+                https://你的用户名.github.io/
+                打开网址，就能看到你上传的网页啦！ 🎉
+                🚀 步骤 5（可选）：绑定自己的域名
+                如果你买了自己的域名，可以在 Pages 设置里添加自定义域名。
+                GitHub 会自动配置免费 HTTPS。
+                ✅ 小结
+                GitHub Pages 免费、永久有效，非常适合小白建 个人主页、说明文档、静态网站。
+                只要你更新仓库内容，网站就会自动刷新。
+                </pre>
+              </div>
+            </li>
+
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ul>
 </body>
 </html>
