@@ -1,0 +1,124 @@
+下面是完整代码：python
+======================================
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+"""
+xlsx_to_html.py
+把 Excel (xlsx) 文件转换成 HTML 页面
+用法: python xlsx_to_html.py input.xlsx output.html
+"""
+
+import sys
+import os
+from openpyxl import load_workbook
+from openpyxl.utils import get_column_letter
+
+def excel_to_html(input_file, output_file):
+    # 加载 Excel 文件
+    wb = load_workbook(input_file, data_only=True)
+    
+    html_parts = []
+    html_parts.append("<!DOCTYPE html>")
+    html_parts.append("<html lang='zh-CN'>")
+    html_parts.append("<head>")
+    html_parts.append("<meta charset='utf-8'>")
+    html_parts.append("<title>Excel 转 HTML</title>")
+    # 简单表格样式
+    html_parts.append("""
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        h2 { margin-top: 40px; }
+        table { border-collapse: collapse; margin-top: 10px; }
+        th, td {
+            border: 1px solid #444;
+            padding: 4px 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+    """)
+    html_parts.append("</head><body>")
+
+    # 遍历所有工作表
+    for sheet in wb.sheetnames:
+        ws = wb[sheet]
+        html_parts.append(f"<h2>工作表: {sheet}</h2>")
+        html_parts.append("<table>")
+
+        # 表头（列号）
+        max_col = ws.max_column
+        col_headers = "".join([f"<th>{get_column_letter(c)}</th>" for c in range(1, max_col + 1)])
+        html_parts.append(f"<tr><th></th>{col_headers}</tr>")
+
+        # 遍历行
+        for row in ws.iter_rows(values_only=True):
+            # 行号（左边加一个）
+            row_index = row[0:0]  # 这里只是为了说明 row 索引
+        for r_idx, row in enumerate(ws.iter_rows(values_only=True), start=1):
+            html_parts.append(f"<tr><th>{r_idx}</th>")
+            for cell in row:
+                value = "" if cell is None else str(cell)
+                html_parts.append(f"<td>{value}</td>")
+            html_parts.append("</tr>")
+
+        html_parts.append("</table>")
+
+    html_parts.append("</body></html>")
+
+    # 写出到 HTML 文件
+    with open(output_file, "w", encoding="utf-8") as f:
+        f.write("\n".join(html_parts))
+
+    print(f"已生成 {output_file}")
+
+def main():
+    if len(sys.argv) != 3:
+        print("用法: python xlsx_to_html.py 输入文件.xlsx 输出文件.html")
+        sys.exit(1)
+
+    input_file = sys.argv[1]
+    output_file = sys.argv[2]
+
+    if not os.path.exists(input_file):
+        print(f"错误: 找不到文件 {input_file}")
+        sys.exit(1)
+
+    excel_to_html(input_file, output_file)
+
+if __name__ == "__main__":
+    main()
+
+=========================================
+使用方法
+
+安装依赖：
+pip install openpyxl
+保存上面的代码为 xlsx_to_html.py
+
+在命令行运行：
+
+     python xlsx_to_html.py 项目计划.xlsx 项目计划.html
+正确如下：
+cd C:\1
+c:\1>python xlsx_to_html.py "C:\1\Type-c port.xlsx" "C:\1\Type-c port.html"
+已生成 C:\1\Type-c port.html
+
+c:\1>
+------------------------------------------------------------
+不是在 .py 文件里写，而是在运行 python xlsx_to_html.py 时 后面加上 Excel 文件和 HTML 文件路径。
+用法说明
+假设你的脚本叫 xlsx_to_html.py，在 C:\1 目录下，那么你在命令行输入：
+cd C:\1
+python xlsx_to_html.py "C:\1\Type-c port.xlsx" "C:\1\Type-c port.html"
+⚠️ 注意两点：
+路径里有空格（比如 Type-c port.xlsx），必须用引号 "..." 包住。
+第一个参数是输入的 Excel 文件路径，第二个参数是要生成的 HTML 文件路径。
+运行后效果
+如果一切正常，命令行会显示：
+已生成 C:\1\Type-c port.html
+然后你就可以在浏览器里打开 C:\1\Type-c port.html，看到转换后的表格。
+
+要不要我帮你改一下脚本，让它不用手动输入参数（比如直接拖拽 .xlsx 到脚本上，就会自动生成同名 .html）？
+打开生成的 HTML 文件即可看到表格。
