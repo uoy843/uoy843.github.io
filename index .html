@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>文件目录树</title>
+    <style>
+        /* 页面基础样式 */
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            padding: 20px;
+        }
+
+        /* 列表容器样式，移除默认列表符号并设置缩进 */
+        ul {
+            list-style: none;
+            padding-left: 20px;
+        }
+
+        /* 隐藏文件夹的复选框 */
+        .folder > input {
+            display: none;
+        }
+
+        /* 文件夹和文件标签的公共样式，用于点击和对齐 */
+        .folder > label, .file > label {
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+        }
+
+        /* 调整文件夹和文件图标的缩进，使其与父文件夹名称对齐 */
+        .file > label {
+            padding-left: 21px; /* 调整此值以实现精确对齐 */
+        }
+        
+        /* 默认隐藏子文件夹列表 */
+        .folder > input + label + ul {
+            display: none;
+        }
+
+        /* 当文件夹被选中时，显示其子列表 */
+        .folder > input:checked + label + ul {
+            display: block;
+        }
+
+        /* 文件夹图标的旋转箭头样式 */
+        .chev {
+            display: inline-block;
+            width: 1em;
+            height: 1em;
+            margin-right: 5px;
+            transition: transform 0.2s;
+        }
+
+        /* 当文件夹被选中时，旋转箭头 */
+        .folder > input:checked + label .chev {
+            transform: rotate(90deg);
+        }
+
+        /* 文件夹和文件图标的样式 */
+        .node svg {
+            width: 1em;
+            height: 1em;
+            vertical-align: middle;
+            margin-right: 5px;
+        }
+
+        /* 文件/文件夹名称的样式 */
+        .name {
+            font-weight: bold;
+        }
+
+        /* 文件内容容器的样式 */
+        .content {
+            display: none; /* 默认隐藏文件内容 */
+            margin-left: 20px; /* 为内容添加左侧缩进 */
+        }
+        
+        /* 为 txt 文件内容设置字体样式，使其与 docx 预览更相似 */
+        .txt-content {
+            font-family: Arial, Helvetica, 'Microsoft YaHei', '黑体', sans-serif;
+            line-height: 1.6;
+            white-space: pre-wrap; /* 允许文本自动换行 */
+        }
+
+        /* Excel 表格的样式 */
+        .xlsx-table {
+            width: 95%;
+            border-collapse: collapse;
+            margin-top: 10px;
+            font-family: 'Segoe UI', Arial, sans-serif;
+            font-size: 14px;
+        }
+
+        .xlsx-table th, .xlsx-table td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+
+        .xlsx-table th {
+            background-color: #f2f2f2;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <h1>文件目录树</h1>
+    <ul>
+        <li class="folder">
+            <input id="f1" type="checkbox" checked>
+            <label for="f1" class="node">
+                <span class="chev"><svg viewBox="0 0 24 24"><path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2" fill="none"/></svg></span>
+                <span><svg viewBox="0 0 24 24"><path d="M3 4h18v18H3z" stroke="currentColor"/></svg></span>
+                <span class="name">项目文件夹1</span>
+            </label>
+            <ul>
+                <li class="folder">
+                    <input id="f2" type="checkbox" checked>
+                    <label for="f2" class="node">
+                        <span class="chev"><svg viewBox="0 0 24 24"><path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2" fill="none"/></svg></span>
+                        <span><svg viewBox="0 0 24 24"><path d="M7 3h10l4 4v14H7z" stroke="currentColor"/></svg></span>
+                        <span class="name">文档 (按名称排序)</span>
+                    </label>
+                    
+                    <ul id="docs-list">
+                        <li class="file" data-path="docs/Google chrome谷歌浏览器启用多线程下载功能教程.html">
+                            <label class="node" onclick="toggleContent(this)">
+                                <span><svg viewBox="0 0 24 24"><path d="M3 3h18v18H3z" stroke="currentColor"/></svg></span>
+                                <span class="name">Google chrome谷歌浏览器启用多线程下载功能教程.docx</span>
+                            </label>
+                            <div class="content">
+                                <h3>文档内容：Word 转网页</h3>
+                                <iframe src="docs/Google chrome谷歌浏览器启用多线程下载功能教程.html" title="Google chrome谷歌浏览器启用多线程下载功能教程.docx 转网页"
+                                        style="width: 95%; height:170px; border: 1px solid #ccc; overflow: auto;"></iframe>
+                                <h3>文档内容：PDF 内嵌</h3>
+                                <iframe src="docs/Google chrome谷歌浏览器启用多线程下载功能教程.pdf" title="Google chrome谷歌浏览器启用多线程下载功能教程.docx PDF 预览"
+                                        style="width: 95%; height: 700px; border: 1px solid #ccc; overflow: auto;"></iframe>
+                                <p><a href="docs/Google chrome谷歌浏览器启用多线程下载功能教程.docx" download>⬇ 下载 Word 文件</a></p>
+                            </div>
+                        </li>
+                        
+						<li class="file" data-path="docs/DOCX文件转换为HTML的python脚本示范.html">
+                            <label class="node" onclick="toggleContent(this)">
+                                <span><svg viewBox="0 0 24 24"><path d="M3 3h18v18H3z" stroke="currentColor"/></svg></span>
+                                <span class="name">DOCX文件转换为HTML的python脚本示范.txt</span>
+                            </label>
+                            <div class="content">
+                                <h3>文档内容：txt 转网页</h3>
+                                <iframe src="docs/DOCX文件转换为HTML的python脚本示范.txt"
+                                        style="width: 95%; height:970px; border: 1px solid #ccc; overflow: auto;"></iframe>
+                            </div>
+                        </li>
+						        
+						
+                        <li class="file" data-path="docs/win10怎么找回自带的windows照片查看器.html">
+                            <label class="node" onclick="toggleContent(this)">
+                                <span><svg viewBox="0 0 24 24"><path d="M3 3h18v18H3z" stroke="currentColor"/></svg></span>
+                                <span class="name">win10怎么找回自带的windows照片查看器.docx</span>
+                            </label>
+                            <div class="content">
+                                <h3>文档内容：Word 转网页</h3>
+                                <iframe src="docs/win10怎么找回自带的windows照片查看器.html" title="win10怎么找回自带的windows照片查看器.docx 转网页"
+                                        style="width: 95%; height:400px; border: 1px solid #ccc; overflow: auto;"></iframe>
+                                <h3>文档内容：PDF 内嵌</h3>
+                                <iframe src="docs/win10怎么找回自带的windows照片查看器.pdf" title="win10怎么找回自带的windows照片查看器.docx PDF 预览" 
+                                        style="width: 95%; height: 1500px; border: 1px solid #ccc; overflow: auto;"></iframe>
+                                <p><a href="docs/win10怎么找回自带的windows照片查看器.docx" download>⬇ 下载 Word 文件</a></p>
+                            </div>
+                        </li>
+                        
+                        <li class="file" data-path="docs/Type-c port.xlsx">
+                            <label class="node" onclick="toggleContent(this)">
+                                <span><svg viewBox="0 0 24 24"><path d="M3 3h18v18H3z" stroke="currentColor"/></svg></span>
+                                <span class="name">Type-c port.xlsx</span>
+                            </label>
+                            <div class="content">
+							    <h3>Type-C 端口引脚定义</h3>
+								<table class="xlsx-table">
+									<thead>
+										<tr>
+										    <th></th><th>A</th><th>B</th><th>C</th><th>D</th><th>E</th><th>F</th><th>G</th><th>H</th><th>I</th><th>J</th><th>K</th><th>L</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr>
+                                           <td>1</td><td>A1</td><td>A2</td><td>A3</td><td>A4</td><td>A5</td><td>A6</td><td>A7</td><td>A8</td><td>A9</td><td>A10</td><td>A11</td><td>A12</td>
+											
+										</tr>
+										<tr>
+                                           <td>2</td><td>GND</td><td>Tx1+</td><td>Tx1-</td><td>Vbus</td><td>cc1</td><td>D+</td><td>D-</td><td>Sbu1</td><td>Vbus</td><td>Rx2-</td><td>Rx2+</td><td>GND</td>
+										</tr>
+										<tr>
+                                            <td>3</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+										</tr>
+										<tr>
+                                            <td>4</td><td>GND</td><td>Rx1+</td><td>Rx1-</td><td>Vbus</td><td>Sbu2</td><td>D-</td><td>D+</td><td>cc2</td><td>Vbus</td><td>Tx2-</td><td>Tx2+</td><td>GND</td>
+										</tr>
+										<tr>
+                                            <td>5</td><td>B12</td><td>B11</td><td>B10</td><td>B9</td><td>B8</td><td>B7</td><td>B6</td><td>B5</td><td>B4</td><td>B3</td><td>B2</td><td>B1</td>
+										</tr>
+										
+									</tbody>
+								</table>
+                            </div>
+                        </li>
+						
+						<li class="file" data-path="docs/示例表格.html">
+                            <label class="node" onclick="toggleContent(this)">
+                                <span><svg viewBox="0 0 24 24"><path d="M3 3h18v18H3z" stroke="currentColor"/></svg></span>
+                                <span class="name">示例表格.xlsx</span>
+                            </label>
+                            <div class="content">
+                                <h3>示例表格</h3>
+                                <table class="xlsx-table">
+                                    <thead>
+                                        <tr>
+                                            <th>任务</th>
+                                            <th>负责人</th>
+                                            <th>状态</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>网站首页设计</td>
+                                            <td>李华</td>
+                                            <td>进行中</td>
+                                        </tr>
+                                        <tr>
+                                            <td>后端数据库搭建</td>
+                                            <td>张伟</td>
+                                            <td>已完成</td>
+                                        </tr>
+                                        <tr>
+                                            <td>用户测试</td>
+                                            <td>王丽</td>
+                                            <td>未开始</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </li>
+						
+                        <li class="file" data-path="docs/GitHub Pages 部署步骤.html">
+                            <label class="node" onclick="toggleContent(this)">
+                                <span><svg viewBox="0 0 24 24"><path d="M3 3h18v18H3z" stroke="currentColor"/></svg></span>
+                                <span class="name">GitHub Pages 部署步骤.txt</span>
+                            </label>
+                            <div class="content">
+                                <h3>文档内容：txt 转网页</h3>
+                                <iframe src="docs/GitHub Pages 部署步骤.txt"
+                                        style="width: 95%; height:700px; border: 1px solid #ccc; overflow: auto;"></iframe>
+                            </div>
+                        </li>
+						<!--
+                        <li class="file" data-path=".pdf">
+                            <label class="node" onclick="toggleContent(this)">
+                                <span><svg viewBox="0 0 24 24"><path d="M3 3h18v18H3z" stroke="currentColor"/></svg></span>
+                                <span class="name">.txt</span>
+                            </label>
+                            <div class="content">
+                                <pre class="txt-content">
+								</pre>
+							</div>
+                        </li>
+						-->
+                        <li class="file" data-path="docs/ode_下载说明.txt">
+                            <label class="node" onclick="toggleContent(this)">
+                                <span><svg viewBox="0 0 24 24"><path d="M3 3h18v18H3z" stroke="currentColor"/></svg></span>
+                                <span class="name">ode_下载说明.txt</span>
+                            </label>
+                            <div class="content">
+                                <pre class="txt-content">链接解析--》https://......?pwd=password      开始处理</pre>
+                            </div>
+                        </li>
+                        <!--
+                        <li class="file" data-path="docs/DOCX文件转换为HTML的python脚本示范.txt">
+                            <label class="node" onclick="toggleContent(this)">
+                                <span><svg viewBox="0 0 24 24"><path d="M3 3h18v18H3z" stroke="currentColor"/></svg></span>
+                                <span class="name">DOCX文件转换为HTML的python脚本示范.txt</span>
+                            </label>
+                            <div class="content">
+                                <pre class="txt-content" >此处输入内容</pre>
+                            </div>	
+                        </li>
+						-->
+                        <li class="file" data-path="docs/文件说明.txt">
+                            <label class="node" onclick="toggleContent(this)">
+                                <span><svg viewBox="0 0 24 24"><path d="M3 3h18v18H3z" stroke="currentColor"/></svg></span>
+                                <span class="name">文件说明.txt</span>
+                            </label>
+                            <div class="content">
+                                <pre class="txt-content">此处输入内容</pre>
+                            </div>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </li>
+    </ul>
+
+    <script>
+        /**
+         * 切换文件内容的显示/隐藏状态，并隐藏其他文件的内容
+         * @param {HTMLElement} element - 被点击的元素
+         */
+        function toggleContent(element) {
+            // 获取所有文件项
+            const allFiles = document.querySelectorAll('.file');
+            // 获取当前被点击的文件项
+            const currentFile = element.closest('.file');
+
+            // 遍历所有文件项
+            allFiles.forEach(file => {
+                const contentDiv = file.querySelector('.content');
+                // 确保文件项有内容容器
+                if (contentDiv) {
+                    // 如果是当前点击的文件
+                    if (file === currentFile) {
+                        // 切换当前文件内容的显示状态
+                        contentDiv.style.display = (contentDiv.style.display === 'block') ? 'none' : 'block';
+                    } else {
+                        // 隐藏其他文件的内容
+                        contentDiv.style.display = 'none';
+                    }
+                }
+            });
+        }
+
+        /**
+         * 按照文件名对文件列表进行排序
+         */
+        const docsList = document.getElementById('docs-list');
+        const fileItems = Array.from(docsList.children);
+        
+        fileItems.sort((a, b) => {
+            const nameA = a.querySelector('.name').innerText.toLowerCase();
+            const nameB = b.querySelector('.name').innerText.toLowerCase();
+            return nameA.localeCompare(nameB, 'zh-CN');
+        });
+
+        // 将排序后的文件重新添加到 DOM 中
+        fileItems.forEach(i => docsList.appendChild(i));
+    </script>
+</body>
+</html>
