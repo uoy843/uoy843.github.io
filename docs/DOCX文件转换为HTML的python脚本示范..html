@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>DOCX 文件转换为 HTML 的 Python 脚本示例</title>
+
+    <style>
+      body{margin:0;background:#0b1222;color:#e5e7eb}
+      .container{max-width:860px;margin:40px auto;padding:28px;background:#0f172a;border-radius:16px;box-shadow:0 20px 60px rgba(0,0,0,.35);border:1px solid rgba(255,255,255,.06)}
+      h1{margin:0 0 12px;font-size:28px}
+      .meta{color:#94a3b8;font-size:14px;margin-bottom:16px}
+      pre{white-space:pre-wrap;word-wrap:break-word;font: 14px/1.7 ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace}
+      p{margin:0 0 1em;line-height:1.9}
+      .content{font-size:16px}
+    </style>
+  
+</head>
+<body>
+  <div class="container">
+    <h1>DOCX 文件转换为 HTML 的 Python 脚本示例</h1>
+    <div class="meta">通过 TXT→HTML 转换生成 · 2025/8/25 07:39:54</div>
+    <pre class="content">提供一个 Python 脚本示例+说明
+ChatGPT 说：
+
+下面是一个将 DOCX 文件转换为 HTML 的 Python 脚本示例，使用了 python-docx 库来读取 DOCX 文件内容，和 html 库来生成 HTML 文件。
+
+1. 安装必要的库
+
+首先，确保你已经安装了 python-docx 和 html 库。如果还没有安装，可以通过以下命令安装：
+
+pip install python-docx
+----------------------------
+2. Python 脚本
+-------------------
+from docx import Document
+import html
+
+def docx_to_html(docx_path, html_path):
+    # 打开 DOCX 文件
+    doc = Document(docx_path)
+
+    # 初始化 HTML 内容
+    html_content = &quot;&lt;html&gt;&lt;body&gt;&quot;
+
+    # 遍历每个段落，将其转换为 HTML 格式
+    for para in doc.paragraphs:
+        html_content += &quot;&lt;p&gt;&quot; + html.escape(para.text) + &quot;&lt;/p&gt;&quot;
+
+    # 遍历每个表格，将其转换为 HTML 格式
+    for table in doc.tables:
+        html_content += &quot;&lt;table border=&#39;1&#39;&gt;&quot;
+        for row in table.rows:
+            html_content += &quot;&lt;tr&gt;&quot;
+            for cell in row.cells:
+                html_content += f&quot;&lt;td&gt;{html.escape(cell.text)}&lt;/td&gt;&quot;
+            html_content += &quot;&lt;/tr&gt;&quot;
+        html_content += &quot;&lt;/table&gt;&quot;
+
+    html_content += &quot;&lt;/body&gt;&lt;/html&gt;&quot;
+
+    # 将 HTML 内容写入文件
+    with open(html_path, &quot;w&quot;, encoding=&quot;utf-8&quot;) as html_file:
+        html_file.write(html_content)
+
+    print(f&quot;文件已成功转换为 HTML: {html_path}&quot;)
+
+# 使用示例
+docx_path = &quot;example.docx&quot;  # 输入你的 DOCX 文件路径
+html_path = &quot;output.html&quot;    # 输出的 HTML 文件路径
+docx_to_html(docx_path, html_path)
+=====================================
+3. 说明
+
+Document: python-docx 库用于打开 DOCX 文件。
+
+html.escape(): 用于将文本中的特殊字符（如 &lt;, &gt;, &amp; 等）转义为 HTML 实体，避免 HTML 标签错误。
+
+段落转换: 将每个段落的文本转为 HTML 的 &lt;p&gt; 标签。
+
+表格转换: 如果 DOCX 文件中有表格，将每个表格行和单元格转换为 &lt;table&gt;, &lt;tr&gt;, &lt;td&gt; 标签。
+
+最后，生成的 HTML 内容会被写入指定路径的 .html 文件中。
+
+4. 执行
+
+运行这个脚本时，输入的 DOCX 文件将被转换为 HTML 文件，并保存到你指定的路径。
+
+==================================
+c:&gt;1&gt;docx_to_html.py
+from docx import Document
+
+def docx_to_html(path):
+    doc = Document(path)
+    html = &quot;&lt;html&gt;&lt;body&gt;\n&quot;
+    for para in doc.paragraphs:
+        html += f&quot;&lt;p&gt;{para.text}&lt;/p&gt;\n&quot;
+    html += &quot;&lt;/body&gt;&lt;/html&gt;&quot;
+    return html
+
+# 示例：转换文件并保存为 HTML
+input_path = r&quot;C:\1\Google chrome谷歌浏览器启用多线程下载功能教程.docx&quot;
+output_path = r&quot;C:\1\Google chrome谷歌浏览器启用多线程下载功能教程.html&quot;
+
+html_content = docx_to_html(input_path)
+
+with open(output_path, &quot;w&quot;, encoding=&quot;utf-8&quot;) as f:
+    f.write(html_content)
+
+print(&quot;转换完成！HTML 文件已保存。&quot;)
+===================================</pre>
+  </div>
+</body>
+</html>
