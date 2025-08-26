@@ -65,7 +65,7 @@ html.escape(): 用于将文本中的特殊字符（如 <, >, & 等）转义为 H
 运行这个脚本时，输入的 DOCX 文件将被转换为 HTML 文件，并保存到你指定的路径。
 
 ==================================
-c:>1>docx_to_html.py
+c:>1>python docx_to_html.py
 from docx import Document
 
 def docx_to_html(path):
@@ -76,6 +76,7 @@ def docx_to_html(path):
     html += "</body></html>"
     return html
 
+先填入*.docx & *.html 
 # 示例：转换文件并保存为 HTML
 input_path = r"C:\1\Google chrome谷歌浏览器启用多线程下载功能教程.docx"
 output_path = r"C:\1\Google chrome谷歌浏览器启用多线程下载功能教程.html"
@@ -84,6 +85,10 @@ html_content = docx_to_html(input_path)
 
 with open(output_path, "w", encoding="utf-8") as f:
     f.write(html_content)
+	---cmd 下run---
+C:\Users\nvme>cd c:\1
 
+c:\1>python docx_to_html.py
+转换完成！HTML 文件已保存。
 print("转换完成！HTML 文件已保存。")
 ===================================
