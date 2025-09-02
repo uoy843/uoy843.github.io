@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>VCCode extensions</title>
+
+    <style>
+      body{margin:0;background:#0b1222;color:#e5e7eb}
+      .container{max-width:860px;margin:40px auto;padding:28px;background:#0f172a;border-radius:16px;box-shadow:0 20px 60px rgba(0,0,0,.35);border:1px solid rgba(255,255,255,.06)}
+      h1{margin:0 0 12px;font-size:28px}
+      .meta{color:#94a3b8;font-size:14px;margin-bottom:16px}
+      pre{white-space:pre-wrap;word-wrap:break-word;font: 14px/1.7 ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace}
+      p{margin:0 0 1em;line-height:1.9}
+      .content{font-size:16px}
+    </style>
+  
+</head>
+<body>
+  <div class="container">
+    <h1>VCCode extensions</h1>
+    <div class="meta">通过 TXT→HTML 转换生成 · 2025/9/2 16:30:22</div>
+    <pre class="content">如何在 VSCode 的终端中运行命令
+✅ 打开 VSCode 的终端
+启动 VSCode
+
+使用快捷键 Ctrl +`（就是 Ctrl 加反引号）打开终端 或者点击顶部菜单栏：终端 → 新建终端
+
+📝 输入导出扩展的命令
+bash
+code --list-extensions &gt; extensions.txt
+这个命令会在当前工作目录生成一个名为 extensions.txt 的文件，里面列出你安装的所有插件名称。
+bracketpaircolordlw.bracket-pair-color-dlw
+christian-kohler.path-intellisense
+esbenp.prettier-vscode
+formulahendry.auto-rename-tag
+moshfeu.compare-folders
+ms-ceintl.vscode-language-pack-zh-hans
+ms-vscode.live-server
+oderwat.indent-rainbow
+pkief.material-icon-theme
+streetsidesoftware.code-spell-checker
+techer.open-in-browser
+usernamehw.errorlens
+----------------------
+重装后如何恢复这些扩展
+当你重置系统并重新安装 VSCode 后，可以用以下命令批量安装这些扩展：
+cat extensions.txt | xargs -n 1 code --install-extension
+⚠️ 注意：你需要先把 extensions.txt 文件复制回你的新系统，并确保 VSCode 的命令行工具 code 已正确配置到系统路径。</pre>
+  </div>
+</body>
+</html>

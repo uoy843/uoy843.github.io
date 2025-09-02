@@ -1,0 +1,13 @@
+.py打包脚本.exe
+使用 PyInstaller 的步骤：
+安装 PyInstaller：在您自己的电脑上（已安装 Python 的机器），打开命令行或终端，运行以下命令来安装 PyInstaller：
+Bash
+pip install pyinstaller
+打包脚本：导航到您保存脚本的目录，然后运行以下命令。为了避免弹出控制台窗口，我推荐使用 -w 参数。
+Bash
+pyinstaller --onefile --windowed 文件名.py
+--onefile: 将所有依赖项打包到一个单独的 .exe 文件中，方便分发。
+--windowed 或 -w: 创建一个没有命令行窗口的图形界面程序，体验更好。
+找到可执行文件：打包完成后，您会在一个名为 dist 的文件夹里找到生成好的 .exe 文件。把这个文件复制到任何没有安装 Python 的电脑上，就可以直接使用了。
+通过这种方式，您可以让程序在任何 Windows、macOS 或 Linux 机器上独立运行，大大提高了它的可用性。
+如果您需要，我可以提供一份完整的、可以直接运行的最终代码，方便您打包。
