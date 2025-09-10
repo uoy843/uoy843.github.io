@@ -16,7 +16,8 @@ import html
 
 def docx_to_html(docx_path, html_path):
     # 打开 DOCX 文件
-    doc = Document(docx_path)
+      doc = Document(docx_path)
+    #doc = Document( r"C:\1\Google chrome谷歌浏览器启用多线程下载功能教程.docx")
 
     # 初始化 HTML 内容
     html_content = "<html><body>"
@@ -40,7 +41,8 @@ def docx_to_html(docx_path, html_path):
     # 将 HTML 内容写入文件
     with open(html_path, "w", encoding="utf-8") as html_file:
         html_file.write(html_content)
-
+   #with open(r"C:\1\Google chrome谷歌浏览器启用多线程下载功能教程.html", "w", encoding="utf-8") as html_file:
+        html_file.write(html_content)
     print(f"文件已成功转换为 HTML: {html_path}")
 
 # 使用示例
