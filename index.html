@@ -124,7 +124,24 @@
                         <span class="name">文档 (按名称排序)</span>
                     </label>
                     
-                    <li class="file" data-path="docs/示例表格.html">
+                    <ul id="docs-list">
+                        <li class="file" data-path="docs/Google chrome谷歌浏览器启用多线程下载功能教程.html"> 
+                                <label class="node" onclick="toggleContent(this)">
+                                   <span><svg viewBox="0 0 24 24"><path d="M3 3h18v18H3z" stroke="currentColor"/></svg></span>
+                                   <span class="name">Google chrome谷歌浏览器启用多线程下载功能教程.docx</span>
+                                </label>
+                                <div class="content">
+                                    <h3>Word内容：Google chrome谷歌浏览器启用多线程下载功能教程.docx</h3>
+                                    <iframe src="docs/Google chrome谷歌浏览器启用多线程下载功能教程.html" width="95%" height="170px" ></iframe>
+								                        <!--title="Google chrome谷歌浏览器启用多线程下载功能教程.docx 转网页"border: 1px solid #ccc; overflow: auto;" -->
+                                    <h3>PDF 内容：Google chrome谷歌浏览器启用多线程下载功能教程.pdf</h3>
+                                    <iframe src="docs/Google chrome谷歌浏览器启用多线程下载功能教程.pdf" width="95%" height="800px" ></iframe><!--title="Google chrome谷歌浏览器启用多线程下载功能教程.docx PDF 预览"
+                                        style="width: 95%; height: 700px; border: 1px solid #ccc; overflow: auto;"-->
+                                    <p><a href="docs/Google chrome谷歌浏览器启用多线程下载功能教程.docx" download>⬇ 下载 Word 文件</a></p>
+                                </div>
+                        </li>
+                        
+                        <li class="file" data-path="docs/示例表格.html">
                             <label class="node" onclick="toggleContent(this)">
                                 <span><svg viewBox="0 0 24 24"><path d="M3 3h18v18H3z" stroke="currentColor"/></svg></span>
                                 <span class="name">示例表格.xlsx</span>
@@ -182,17 +199,7 @@
                              </div>
                         </li>
                     
-                    <li class="file" data-path="docs/apple 2和PC共享文件.html">
-                            <label class="node" onclick="toggleContent(this)">
-                                <span><svg viewBox="0 0 24 24"><path d="M3 3h18v18H3z" stroke="currentColor"/></svg></span>
-                                <span class="name">apple 2和PC共享文件件.txt</span>
-                            </label>
-                            <div class="content">
-                                <h3>文档内容：apple 2和PC共享文件.txt</h3>
-                                <iframe src="docs/apple 2和PC共享文件.txt" 
-                                        style="width: 95%; height:100px; border: 1px solid #ccc; overflow: auto;"></iframe>
-                            </div>
-                        </li>
+                    
                         
                         <li class="file" data-path="docs/DOCX文件转换为HTML的python脚本示范.html">
                             <label class="node" onclick="toggleContent(this)">
@@ -230,22 +237,27 @@
                             </div>
                         </li>
                     
-                    <ul id="docs-list">
+                    <!--<ul id="docs-list">
                         <li class="file" data-path="docs/Google chrome谷歌浏览器启用多线程下载功能教程.html">
                             <label class="node" onclick="toggleContent(this)">
                                 <span><svg viewBox="0 0 24 24"><path d="M3 3h18v18H3z" stroke="currentColor"/></svg></span>
                                 <span class="name">Google chrome谷歌浏览器启用多线程下载功能教程.docx</span>
                             </label>
                             <div class="content">
-                                <h3>Word内容：Google chrome谷歌浏览器启用多线程下载功能教程.docx</h3>
-                                <iframe src="docs/Google chrome谷歌浏览器启用多线程下载功能教程.html" width="95%" height="170px" ></iframe>
-								                    <!--title="Google chrome谷歌浏览器启用多线程下载功能教程.docx 转网页"border: 1px solid #ccc; overflow: auto;" -->
-                                <h3>PDF 内容：Google chrome谷歌浏览器启用多线程下载功能教程.pdf</h3>
-                                <iframe src="docs/Google chrome谷歌浏览器启用多线程下载功能教程.pdf" width="95%" height="800px" ></iframe><!--title="Google chrome谷歌浏览器启用多线程下载功能教程.docx PDF 预览"
-                                        style="width: 95%; height: 700px; border: 1px solid #ccc; overflow: auto;"-->
-                                <p><a href="docs/Google chrome谷歌浏览器启用多线程下载功能教程.docx" download>⬇ 下载 Word 文件</a></p>
+                    -->        
+                            
+                        
+                    <li class="file" data-path="docs/apple 2和PC共享文件.html">
+                            <label class="node" onclick="toggleContent(this)">
+                                <span><svg viewBox="0 0 24 24"><path d="M3 3h18v18H3z" stroke="currentColor"/></svg></span>
+                                <span class="name">apple 2和PC共享文件件.txt</span>
+                            </label>
+                            <div class="content">
+                                <h3>文档内容：apple 2和PC共享文件.txt</h3>
+                                <iframe src="docs/apple 2和PC共享文件.txt" 
+                                        style="width: 95%; height:100px; border: 1px solid #ccc; overflow: auto;"></iframe>
                             </div>
-                        </li>
+                        </li>       
                         
                         <li class="file" data-path="docs/HTML 教程.html">
                             <label class="node" onclick="toggleContent(this)">
@@ -313,7 +325,8 @@
                             </div>
                         </li>
 
-                        <label class="node" onclick="toggleContent(this)">
+                        <li class="file" data-path="docs/Type-c port.xlsx">
+                            <label class="node" onclick="toggleContent(this)">
                                 <span><svg viewBox="0 0 24 24"><path d="M3 3h18v18H3z" stroke="currentColor"/></svg></span>
                                 <span class="name">Type-c port.xlsx</span>
                             </label>
