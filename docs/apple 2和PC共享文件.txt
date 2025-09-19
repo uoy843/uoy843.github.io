@@ -1,0 +1,5 @@
+1 在同一网络下，在apple 上安装Documents ICoud，在连接下点电脑。会出现连接电脑画面，出现4个数字。
+2 在PC 上输入docstransfer.com，输入上面的数字。连接成功。
+iTunes
+iTunes64stetup 12.6.5.3
+iTunes64stetup 12.6.3.6
