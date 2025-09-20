@@ -126,8 +126,6 @@
                     
                     <ul id="docs-list">
                     
-                        
-                        
                         <li class="file" data-path="docs/示例表格.html">
                             <label class="node" onclick="toggleContent(this)">
                                 <span><svg viewBox="0 0 24 24"><path d="M3 3h18v18H3z" stroke="currentColor"/></svg></span>
@@ -197,9 +195,7 @@
                                         style="width: 95%; height:970px; border: 1px solid #ccc; overflow: auto;"></iframe>
                             </div>
                         </li>
-                        
-                        
-                        
+                     
                         <li class="file" data-path="docs/GitHub Pages 部署步骤.html">
                             <label class="node" onclick="toggleContent(this)">
                                 <span><svg viewBox="0 0 24 24"><path d="M3 3h18v18H3z" stroke="currentColor"/></svg></span>
@@ -294,8 +290,6 @@
                             </div>
                         </li>
 
-                        
-                        
                         <li class="file" data-path="docs/VCCode extensions.html">
                             <label class="node" onclick="toggleContent(this)">
                                 <span><svg viewBox="0 0 24 24"><path d="M3 3h18v18H3z" stroke="currentColor"/></svg></span>
@@ -430,8 +424,8 @@
             </label>
                 <ul>
                     <li class="folder">
-                        <input id="g2" type="checkbox" checked>
-                        <label for="g2" class="node">
+                        <input id="f3" type="checkbox" checked>
+                        <label for="f3" class="node">
                             <span class="chev"><svg viewBox="0 0 24 24"><path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2" fill="none"/></svg></span>
                             <span><svg viewBox="0 0 24 24"><path d="M7 3h10l4 4v14H7z" stroke="currentColor"/></svg></span>
                             <span class="name">LED(按名称排序)</span>
@@ -514,42 +508,51 @@
                 </ul>
         </li>
     </ul>
+    
     <script>
-        /**
-         * 切换文件内容的显示/隐藏状态，并隐藏其他文件的内容
-         * @param {HTMLElement} element - 被点击的元素
-         */
-        function toggleContent(element) {
-            // 获取所有文件项
-            const allFiles = document.querySelectorAll('.file');
-            // 获取当前被点击的文件项
-            const currentFile = element.closest('.file');
+    /**
+     * 切换文件内容的显示/隐藏状态，并隐藏其他文件的内容
+     * @param {HTMLElement} element - 被点击的元素
+     */
+    function toggleContent(element) {
+        // 获取所有文件项
+        const allFiles = document.querySelectorAll('.file');
+        // 获取当前被点击的文件项
+        const currentFile = element.closest('.file');
 
-            // 遍历所有文件项
-            allFiles.forEach(file => {
-                const contentDiv = file.querySelector('.content');
-                // 确保文件项有内容容器
-                if (contentDiv) {
-                    // 如果是当前点击的文件
-                    if (file === currentFile) {
-                        // 切换当前文件内容的显示状态
-                        contentDiv.style.display = (contentDiv.style.display === 'block') ? 'none' : 'block';
-                    } else {
-                        // 隐藏其他文件的内容
-                        contentDiv.style.display = 'none';
-                    }
+        // 遍历所有文件项
+        allFiles.forEach(file => {
+            const contentDiv = file.querySelector('.content');
+            // 确保文件项有内容容器
+            if (contentDiv) {
+                // 如果是当前点击的文件
+                if (file === currentFile) {
+                    // 切换当前文件内容的显示状态
+                    contentDiv.style.display = (contentDiv.style.display === 'block') ? 'none' : 'block';
+                } else {
+                    // 隐藏其他文件的内容
+                    contentDiv.style.display = 'none';
                 }
-            });
-        }
+            }
+        });
+    }
 
-        // --- 文档加载完成后执行 ---
-        document.addEventListener('DOMContentLoaded', function() {
-            const docsList = document.getElementById('docs-list');
-            const fileItems = Array.from(docsList.children);
+    // --- 文档加载完成后执行 ---
+    document.addEventListener('DOMContentLoaded', function() {
+        const docsList = document.getElementById('docs-list');
+        const ledList = document.getElementById('led-list');
+
+        /**
+         * 处理文件列表：排序并显示文件数量
+         * @param {HTMLElement} listElement - 文件列表的父元素（如 docsList 或 ledList）
+         * @param {string} folderLabelId - 文件夹名称标签的ID，用于更新数字
+         */
+        function processFileList(listElement, folderLabelId) {
+            if (!listElement) return;
+
+            const fileItems = Array.from(listElement.children);
             
-            /**
-             * 按照文件名对文件列表进行排序
-             */
+            // 按照文件名对文件列表进行排序
             fileItems.sort((a, b) => {
                 const nameA = a.querySelector('.name').innerText.toLowerCase();
                 const nameB = b.querySelector('.name').innerText.toLowerCase();
@@ -557,17 +560,25 @@
             });
 
             // 将排序后的文件重新添加到 DOM 中
-            fileItems.forEach(item => docsList.appendChild(item));
+            fileItems.forEach(item => listElement.appendChild(item));
 
-            /**
-             * 在文件夹名称后显示文件数量
-             */
-            const folderLabel = document.querySelector('label[for="f2"] .name');
+            // 在文件夹名称后显示文件数量
+            const folderLabel = document.querySelector(`label[for="${folderLabelId}"] .name`);
             const fileCount = fileItems.length;
             if (folderLabel) {
-                folderLabel.innerText += ` (${fileCount})`;
+                // 检查是否已添加过数字，避免重复添加
+                if (!folderLabel.innerText.includes(`(${fileCount})`)) {
+                    folderLabel.innerText += ` (${fileCount})`;
+                }
             }
-        });
-    </script>
+        }
+
+        // 处理“文档”文件夹
+        processFileList(docsList, 'f2');
+
+        // 处理“LED”文件夹
+        processFileList(ledList, 'f3');
+    });
+</script>
 </body>
 </html>
