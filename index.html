@@ -239,6 +239,18 @@
                                 <p><a href="docs/HTML 教程.docx" download>⬇ 下载 Word 文件</a></p>
                             </div>
                         </li>
+                        
+                        <li class="file" data-path="docs/kicad.html">
+                            <label class="node" onclick="toggleContent(this)">
+                                <span><svg viewBox="0 0 24 24"><path d="M3 3h18v18H3z" stroke="currentColor"/></svg></span>
+                                <span class="name">kicad.txt</span>
+                            </label>
+                            <div class="content">
+                                <h3>文档内容：kicad.txt</h3>
+                                <iframe src="docs/kicad.txt"
+                                        style="width: 95%; height:700px; border: 1px solid #ccc; overflow: auto;"></iframe>
+                            </div>
+                        </li>
 						
                         <li class="file" data-path="docs/Notepad++使用集合.html">
                             <label class="node" onclick="toggleContent(this)">
@@ -424,8 +436,8 @@
             </label>
                 <ul>
                     <li class="folder">
-                        <input id="f3" type="checkbox" checked>
-                        <label for="f3" class="node">
+                        <input id="g2" type="checkbox" checked>
+                        <label for="g2" class="node">
                             <span class="chev"><svg viewBox="0 0 24 24"><path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2" fill="none"/></svg></span>
                             <span><svg viewBox="0 0 24 24"><path d="M7 3h10l4 4v14H7z" stroke="currentColor"/></svg></span>
                             <span class="name">LED(按名称排序)</span>
@@ -720,7 +732,7 @@
         processFileList(docsList, 'f2');
 
         // 处理“LED”文件夹
-        processFileList(ledList, 'f3');
+        processFileList(ledList, 'g2');
     });
 </script>
 </body>
