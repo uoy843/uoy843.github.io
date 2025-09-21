@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>WIN98 和宿主机共享文件</title>
+
+    <style>
+      body{margin:0;background:#0b1222;color:#e5e7eb}
+      .container{max-width:860px;margin:40px auto;padding:28px;background:#0f172a;border-radius:16px;box-shadow:0 20px 60px rgba(0,0,0,.35);border:1px solid rgba(255,255,255,.06)}
+      h1{margin:0 0 12px;font-size:28px}
+      .meta{color:#94a3b8;font-size:14px;margin-bottom:16px}
+      pre{white-space:pre-wrap;word-wrap:break-word;font: 14px/1.7 ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace}
+      p{margin:0 0 1em;line-height:1.9}
+      .content{font-size:16px}
+    </style>
+  
+</head>
+<body>
+  <div class="container">
+    <h1>WIN98 和宿主机共享文件</h1>
+    <div class="meta">通过 TXT→HTML 转换生成 · 2025/9/21 17:26:10</div>
+    <pre class="content">用网络共享传输（高级）WIN98 和宿主机共享文件
+------------------------------------
+Windows 新建用户 + 设置共享文件夹（给 Win98 虚拟机访问）
+一、创建专用用户（宿主机）
+打开本地用户管理器
+按下 Win + R，输入：
+lusrmgr.msc
+回车（Windows 家庭版没有 lusrmgr.msc，可以用 netplwiz 或 PowerShell 创建用户）。
+新建用户
+在左侧点 用户 → 右键 → 新用户
+用户名输入：vm98  pass=123456
+设置密码（ 必须有密码，Win98 不支持空密码）。
+取消勾选“用户下次登录必须更改密码”。
+点击 创建。
+如果没有 lusrmgr.msc，可以用命令行：
+net user vm98 123456 /add
+二、设置共享文件夹权限
+找到共享目录
+假设共享文件夹是：E:\VM_Share
+右键 → 属性 → 共享 → 高级共享
+开启共享
+勾选 “共享此文件夹”
+点击 权限
+删除默认的 Everyone（可选）
+点击 添加 → 输入 vm98 → 确定
+勾选 读取 或 完全控制（看你是否需要 Win98 能写入）。
+三、设置 NTFS 安全权限（很重要）
+在文件夹属性 → 安全 → 编辑 → 添加用户
+输入 vm98 → 确定
+给 vm98 分配权限：
+至少 读取（只读共享）
+或 修改/完全控制（读写共享）
+点击 应用 → 确定。
+四、Win98 虚拟机访问方法
+打开 Win98 → 资源管理器
+地址栏输入：
+\\10.0.0.2\VM_Share
+系统提示输入账号密码：
+用户名: 10.0.0.2\vm98
+密码:   （你设置的密码）
+确认后，就能访问宿主机共享文件夹。
+五、常见问题排查
+提示找不到路径 → 检查 IP 是否对，确保能 ping 10.0.0.2。
+提示拒绝访问 → 确认共享权限 + NTFS 权限里都加了 vm98。
+提示用户名或密码错误 → 确认输入 10.0.0.2\vm98 而不是只有 vm98。
+仍然不行 → 进入宿主机 控制面板 → 网络和共享中心 → 高级共享设置：
+启用 密码保护的共享
+启用 文件和打印机共享。</pre>
+  </div>
+</body>
+</html>
