@@ -13,7 +13,53 @@
 <p>如何配置照片查看器</p>
 <p>如果要把照片查看器作为默认的图片程序，可以右击图片选择 程序</p>
 <p></p>
-<p>然后找到照片查看器轩轩，点击 “始终使用此方式”打开</p>
+<p>然后找到照片查看器，点击 “打开方式”打开windows 照片查看器</p>
+<p>-----------------------------</p>
+<p>照片查看器安装地方？</p>
+<p>ChatGPT 说：</p>
+<p>你是指 Windows 自带的“照片查看器”（Windows Photo Viewer）还是你另外安装的第三方看图软件？</p>
+<p>情况一：Windows 自带的 照片查看器</p>
+<p>在 Windows 7 里，它默认存在，可以直接用。</p>
+<p>在 Windows 10/11 里，系统虽然还保留着“Windows Photo Viewer”的程序，但默认被隐藏，取而代之是“照片”应用。</p>
+<p>所以你在 C:\Program Files\Windows Photo Viewer\ 下其实能找到它，主要文件是 PhotoViewer.dll。</p>
+<p>但是它不会出现在“打开方式”列表里，需要修改注册表才能启用。</p>
+<p>启用步骤（Win10/11）：</p>
+<p>按 Win + R，输入 regedit 打开注册表。</p>
+<p>导入一个启用 Photo Viewer 的 .reg 文件（我可以帮你写好）。</p>
+<p>然后在“右键 → 打开方式”里就能选到“Windows 照片查看器”了。</p>
+<p>情况二：第三方看图软件</p>
+<p>如果你是问 安装目录，那就要看具体软件（如 Honeyview、IrfanView、ACDSee、2345 看图王等），一般都在：</p>
+<p>C:\Program Files\软件名\</p>
+<p>C:\Program Files (x86)\软件名\</p>
+<p></p>
+<p>要不要我帮你生成一个 一键恢复 Win10/11 里 Windows 照片查看器的 reg 文件？这样你不用自己改注册表，直接导入就能用了。</p>
+<p>您说：</p>
+<p>生成一个 一键恢复 Win10/11 里 Windows 照片查看器的 reg 文件</p>
+<p>ChatGPT 说：</p>
+<p>好的 👍 我给你写一个 启用 Windows 照片查看器的 .reg 文件内容。</p>
+<p>你可以把下面的内容复制到记事本，保存为 Enable_Windows_Photo_Viewer.reg，然后双击导入注册表即可。</p>
+<p>Windows Registry Editor Version 5.00</p>
+<p></p>
+<p>; 启用 Windows 照片查看器</p>
+<p></p>
+<p>[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows Photo Viewer\Capabilities\FileAssociations]</p>
+<p>".jpg"="PhotoViewer.FileAssoc.Tiff"</p>
+<p>".jpeg"="PhotoViewer.FileAssoc.Tiff"</p>
+<p>".png"="PhotoViewer.FileAssoc.Tiff"</p>
+<p>".bmp"="PhotoViewer.FileAssoc.Tiff"</p>
+<p>".gif"="PhotoViewer.FileAssoc.Tiff"</p>
+<p>".tif"="PhotoViewer.FileAssoc.Tiff"</p>
+<p>".tiff"="PhotoViewer.FileAssoc.Tiff"</p>
+<p>使用步骤</p>
+<p>打开 记事本 → 粘贴上面的内容。</p>
+<p>另存为 → 文件名：Enable_Windows_Photo_Viewer.reg</p>
+<p>保存类型：所有文件</p>
+<p>编码：ANSI（默认即可）</p>
+<p>双击运行 Enable_Windows_Photo_Viewer.reg → 选择 是 → 注册表已合并。</p>
+<p>现在，右键点击一张图片 → 打开方式 → 就能看到 Windows 照片查看器 了。</p>
+<p>如果想设为默认，可以去：
+设置 → 应用 → 默认应用 → 选择照片查看器 → 设为默认。</p>
+<p></p>
 <p></p>
 <p></p>
 </body></html>
