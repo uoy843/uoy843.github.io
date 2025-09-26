@@ -245,6 +245,8 @@ POT 滑线变阻器
 PELAY-DPDT 双刀双掷继电器
 RES1.2 电阻
 RES3.4 可变电阻
+R_Variable 可变电阻(多变的=Variable)
+R_Variable_US 可变电阻
 RESISTOR BRIDGE ? 桥式电阻
 RESPACK ? 电阻
 SCR 晶闸管
