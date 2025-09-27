@@ -94,3 +94,75 @@ c:\1>python docx_to_html.py
 转换完成！HTML 文件已保存。
 print("转换完成！HTML 文件已保存。")
 ===================================
+#docx_to_html拖拽.txt，下为源码
+-----------------------
+#!/usr/bin/env python3
+"""
+docx_to_html.py - CLI 版本（支持文字+图片）
+
+功能:
+- 支持命令行指定输入输出文件
+- 支持拖拽 .docx 文件到脚本
+- 正确处理文字和图片（嵌入 Base64）
+- 支持批量转换
+
+依赖:
+    pip install mammoth
+"""
+
+import sys
+from pathlib import Path
+import base64
+
+try:
+    import mammoth
+except ImportError:
+    print("Missing dependency: mammoth. Install with: pip install mammoth")
+    sys.exit(1)
+
+
+def convert_docx_to_html(input_path: Path, output_path: Path):
+    if not input_path.exists():
+        print(f"Input file does not exist: {input_path}")
+        return
+
+    def convert_image(image):
+        with image.open() as image_bytes:
+            data = image_bytes.read()
+        b64 = base64.b64encode(data).decode("ascii")
+        return {"src": f"data:{image.content_type};base64,{b64}"}
+
+    with open(input_path, "rb") as docx_file:
+        result = mammoth.convert_to_html(docx_file, convert_image=mammoth.images.inline(convert_image))
+        html = result.value
+
+    with open(output_path, "w", encoding="utf-8") as fo:
+        fo.write(html)
+
+    print(f"Converted: {input_path} -> {output_path}")
+
+
+def main():
+    args = sys.argv[1:]
+    if not args:
+        print("Usage: python docx_to_html.py input.docx [output.html]")
+        print("       You can drag & drop multiple .docx files onto this script")
+        sys.exit(0)
+
+    for arg in args:
+        input_path = Path(arg)
+        if input_path.suffix.lower() != ".docx":
+            print(f"Skipped (not .docx): {input_path}")
+            continue
+
+        # 自动生成输出路径
+        if len(args) == 2 and Path(args[1]).suffix.lower() == ".html" and input_path.exists():
+            output_path = Path(args[1])
+        else:
+            output_path = input_path.with_suffix(".html")
+
+        convert_docx_to_html(input_path, output_path)
+
+
+if __name__ == '__main__':
+    main()

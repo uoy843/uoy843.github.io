@@ -19,7 +19,7 @@
 <body>
   <div class="container">
     <h1>DOCX文件转换为HTML的python脚本示范</h1>
-    <div class="meta">通过 TXT→HTML 转换生成 · 2025/8/26 15:11:55</div>
+    <div class="meta">通过 TXT→HTML 转换生成 · 2025/9/27 13:32:36</div>
     <pre class="content">提供一个 Python 脚本示例+说明
 ChatGPT 说：
 
@@ -38,7 +38,8 @@ import html
 
 def docx_to_html(docx_path, html_path):
     # 打开 DOCX 文件
-    doc = Document(docx_path)
+      doc = Document(docx_path)
+    #doc = Document( r&quot;C:\1\Google chrome谷歌浏览器启用多线程下载功能教程.docx&quot;)
 
     # 初始化 HTML 内容
     html_content = &quot;&lt;html&gt;&lt;body&gt;&quot;
@@ -62,7 +63,8 @@ def docx_to_html(docx_path, html_path):
     # 将 HTML 内容写入文件
     with open(html_path, &quot;w&quot;, encoding=&quot;utf-8&quot;) as html_file:
         html_file.write(html_content)
-
+   #with open(r&quot;C:\1\Google chrome谷歌浏览器启用多线程下载功能教程.html&quot;, &quot;w&quot;, encoding=&quot;utf-8&quot;) as html_file:
+        html_file.write(html_content)
     print(f&quot;文件已成功转换为 HTML: {html_path}&quot;)
 
 # 使用示例
@@ -113,7 +115,80 @@ C:\Users\nvme&gt;cd c:\1
 c:\1&gt;python docx_to_html.py
 转换完成！HTML 文件已保存。
 print(&quot;转换完成！HTML 文件已保存。&quot;)
-===================================</pre>
+===================================
+#docx_to_html拖拽.txt，下为源码
+-----------------------
+#!/usr/bin/env python3
+&quot;&quot;&quot;
+docx_to_html.py - CLI 版本（支持文字+图片）
+
+功能:
+- 支持命令行指定输入输出文件
+- 支持拖拽 .docx 文件到脚本
+- 正确处理文字和图片（嵌入 Base64）
+- 支持批量转换
+
+依赖:
+    pip install mammoth
+&quot;&quot;&quot;
+
+import sys
+from pathlib import Path
+import base64
+
+try:
+    import mammoth
+except ImportError:
+    print(&quot;Missing dependency: mammoth. Install with: pip install mammoth&quot;)
+    sys.exit(1)
+
+
+def convert_docx_to_html(input_path: Path, output_path: Path):
+    if not input_path.exists():
+        print(f&quot;Input file does not exist: {input_path}&quot;)
+        return
+
+    def convert_image(image):
+        with image.open() as image_bytes:
+            data = image_bytes.read()
+        b64 = base64.b64encode(data).decode(&quot;ascii&quot;)
+        return {&quot;src&quot;: f&quot;data:{image.content_type};base64,{b64}&quot;}
+
+    with open(input_path, &quot;rb&quot;) as docx_file:
+        result = mammoth.convert_to_html(docx_file, convert_image=mammoth.images.inline(convert_image))
+        html = result.value
+
+    with open(output_path, &quot;w&quot;, encoding=&quot;utf-8&quot;) as fo:
+        fo.write(html)
+
+    print(f&quot;Converted: {input_path} -&gt; {output_path}&quot;)
+
+
+def main():
+    args = sys.argv[1:]
+    if not args:
+        print(&quot;Usage: python docx_to_html.py input.docx [output.html]&quot;)
+        print(&quot;       You can drag &amp; drop multiple .docx files onto this script&quot;)
+        sys.exit(0)
+
+    for arg in args:
+        input_path = Path(arg)
+        if input_path.suffix.lower() != &quot;.docx&quot;:
+            print(f&quot;Skipped (not .docx): {input_path}&quot;)
+            continue
+
+        # 自动生成输出路径
+        if len(args) == 2 and Path(args[1]).suffix.lower() == &quot;.html&quot; and input_path.exists():
+            output_path = Path(args[1])
+        else:
+            output_path = input_path.with_suffix(&quot;.html&quot;)
+
+        convert_docx_to_html(input_path, output_path)
+
+
+if __name__ == &#39;__main__&#39;:
+    main()
+</pre>
   </div>
 </body>
 </html>
