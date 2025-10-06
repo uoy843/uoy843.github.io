@@ -989,6 +989,33 @@
         </li>
     </ul>
     
+    <ul>
+        <li class="folder">
+            <input id="h1" type="checkbox" checked>
+            <label for="h1" class="node">
+                <span class="chev"><svg viewBox="0 0 24 24"><path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2" fill="none"/></svg></span>
+                <span><svg viewBox="0 0 24 24"><path d="M3 4h18v18H3z" stroke="currentColor"/></svg></span>
+                <span class="name">PDF</span>
+            </label>
+                <ul>
+                    <li class="folder">
+                        <input id="h2" type="checkbox" checked>
+                        <label for="h2" class="node">
+                            <span class="chev"><svg viewBox="0 0 24 24"><path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2" fill="none"/></svg></span>
+                            <span><svg viewBox="0 0 24 24"><path d="M7 3h10l4 4v14H7z" stroke="currentColor"/></svg></span>
+                            <span class="name">PDF(按名称排序)</span>
+                        </label>
+                    
+                        <ul id="PDF-list">
+                        
+                        </ul>   
+                    </li>      
+                </ul>
+        </li>
+    </ul>
+    
+    
+    
     <script>
     /**
      * 切换文件内容的显示/隐藏状态，并隐藏其他文件的内容
@@ -1021,6 +1048,7 @@
     document.addEventListener('DOMContentLoaded', function() {
         const docsList = document.getElementById('docs-list');
         const ledList = document.getElementById('led-list');
+        const ledList = document.getElementById('pdf-list');
 
         /**
          * 处理文件列表：排序并显示文件数量
@@ -1058,6 +1086,9 @@
 
         // 处理“LED”文件夹
         processFileList(ledList, 'g2');
+        
+        // 处理“PDF”文件夹
+        processFileList(docsList, 'h2');
     });
 </script>
 </body>
