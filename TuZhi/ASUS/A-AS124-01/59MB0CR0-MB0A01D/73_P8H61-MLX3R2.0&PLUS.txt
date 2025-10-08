@@ -1,0 +1,34 @@
+﻿程式代碼:[BOMRC11C]版本:1.0                                                                    列印日期:05-JUN-2012
+廠別名稱:0B9-814 Organization                      BOM多階比較表                               列印時間:09:47:23
+廠別代碼:GB9                                       ==============                              頁    次:1 of 1
+BOM1成品料號: 59MB0BS0-MB0A02D    P8H61-M LX3 R2.0 R2.01 <GA> EN-0152326    比較階層: 15
+BOM2成品料號: 59MB0CR0-MB0A01D    P8H61-M LX3 PLUS R2.0 R2.01<GA> (EN*152169)
+
+料號                                 品名規格                                   單位 BOM1用量 BOM2用量 BOM1插件位置  BOM2插件位置
+--------------------                 ------------------------------------------ ---- -------- -------- ------------- -------------
+11G040447749                         [列管] CAP EL 470UF/16V 8*11.5 DIP-T       PCS         1          XCE1
+                                     CHEMICON/KZG16VB470MH11CCE0  <G> QVL:
+                                     CHEMICON
+11031-0001F000                       [列管]CAP PL 100UF/16V 6.3*9 DIP 20%       PCS                  7               UCE6 UCE8
+                                     APAQ/160AR5K101M0609C                                                           ACE9 UCE5
+                                                                                                                     UCE1 UCE4
+                                                                                                                     ACE10
+11031-0002F000                       [列管]CAP PL 560UF/4V 6.3*9 DIP 20%        PCS         2        7               PCE19 PCE24
+                                     APAQ/4R0AR5K561M0609C                                                           PCE20 PCE25
+                                                                                                                     PCE15
+
+11011-00028000                       [列管]CAP EL 100UF/16V 5*11 DIP            PCS         7          UCE6 UCE8
+                                     TEAPO/KSE107M016S1ABC11K                                          ACE9 UCE5
+                                                                                                       UCE1 UCE4
+                                                                                                       ACE10
+11G090427712                         [列管]CAP PL 270UF/16V 8*12 DIP            PCS         4        5               XCE1
+                                     20%APAQ/160AR5K271M0812C  QVL:鈺邦
+
+10G213100113030                      [列管]RES 1K OHM 1/10W(0603)1%             PCS         2          PR137 PR150
+                                     YAGEO/RC0603FR-071KL <G>QVL: YAGEOYAGEO
+11G040482758                         [列管] CAP EL 820UF/6.3V 8*11.5 DIP-       PCS         5          PCE19 PCE24
+                                     TCHEMICON/KZG6.3VB820MCCH11E0<GQVL:                               PCE20 PCE25
+                                     CHEMICON                                                          PCE15
+
+10G213000003010                      [列管]RES 0 OHM 1/10W (0603) JUMP TA-      PCS        16       18               PR137 PR150
+                                     I/RM06JTN0 <G>  QVL: 大毅, 大毅

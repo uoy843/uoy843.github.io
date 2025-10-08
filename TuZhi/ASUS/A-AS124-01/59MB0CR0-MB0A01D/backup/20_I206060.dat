@@ -1,0 +1,70 @@
+Board: 59MB0CR0-MB0A01D 06-06-2012 14:12:47
+Test NO. : R-1  ICTid : 0  LOT : 0
+Fixture barcode : NULL
+*************** Short Fail **************
+<307><352>
+<514><518>
+*************** Open Fail ***************
+< 690> <149 690>
+************* Component Fail ************
+61   JUSB56_1  M_V: 4.000    Dev:+300.0%
+Act_V: 1.000     Std_V: 1.000    Loc: A2
+H-Pin:1027 L-Pin:69   +LM:+10%  -LM:-10%
+580  RSRX1     M_V:99999.90    Dev:+999.9%
+Act_V: 33.00     Std_V: 33.00    Loc: A3
+H-Pin:149  L-Pin:690  +LM:+40%  -LM:-40%
+628  RPR179    M_V:873.80    Dev:+56.0%
+Act_V:560.00     Std_V:560.00    Loc: F4
+H-Pin:800  L-Pin:1    +LM:+40%  -LM:-40%
+644  RD3R1     M_V: 0.899K   Dev:-10.1%
+Act_V: 1.000K    Std_V: 1.000K   Loc: E4
+H-Pin:741  L-Pin:517  +LM:+10%  -LM:-10%
+648  RD3R8     M_V: 1.287K   Dev:+28.7%
+Act_V: 1.000K    Std_V: 1.000K   Loc: C4
+H-Pin:562  L-Pin:1    +LM:+10%  -LM:-10%
+650  RHR78     M_V: 0.890K   Dev:-11.0%
+Act_V: 1.000K    Std_V: 1.000K   Loc: D3
+H-Pin:660  L-Pin:517  +LM:+10%  -LM:-10%
+651  RHR79     M_V: 1.249K   Dev:+24.9%
+Act_V: 1.000K    Std_V: 1.000K   Loc: D3
+H-Pin:660  L-Pin:1    +LM:+10%  -LM:-10%
+Board: 59MB0CR0-MB0A01D 06-06-2012 14:14:47
+Test NO. : R-1  ICTid : 0  LOT : 0
+Fixture barcode : NULL
+************* Component Fail ************
+628  RPR179    M_V:888.47    Dev:+58.7%
+Act_V:560.00     Std_V:560.00    Loc: F4
+H-Pin:800  L-Pin:1    +LM:+40%  -LM:-40%
+648  RD3R8     M_V: 1.275K   Dev:+27.5%
+Act_V: 1.000K    Std_V: 1.000K   Loc: C4
+H-Pin:562  L-Pin:1    +LM:+10%  -LM:-10%
+650  RHR78     M_V: 0.890K   Dev:-11.0%
+Act_V: 1.000K    Std_V: 1.000K   Loc: D3
+H-Pin:660  L-Pin:517  +LM:+10%  -LM:-10%
+651  RHR79     M_V: 1.237K   Dev:+23.7%
+Act_V: 1.000K    Std_V: 1.000K   Loc: D3
+H-Pin:660  L-Pin:1    +LM:+10%  -LM:-10%
+660  RD3R2     M_V: 1.264K   Dev:+26.4%
+Act_V: 1.000K    Std_V: 1.000K   Loc: E4
+H-Pin:741  L-Pin:1    +LM:+10%  -LM:-10%
+668  RD3R4     M_V: 1.237K   Dev:+23.7%
+Act_V: 1.000K    Std_V: 1.000K   Loc: C4
+H-Pin:532  L-Pin:1    +LM:+10%  -LM:-10%
+670  RPR189    M_V: 1.248K   Dev:+24.8%
+Act_V: 1.000K    Std_V: 1.000K   Loc: F3
+H-Pin:859  L-Pin:1    +LM:+10%  -LM:-10%
+752  ROR80     M_V: 7.244K   Dev:-11.7%
+Act_V: 8.200K    Std_V: 8.200K   Loc: A2
+H-Pin:308  L-Pin:120  +LM:+10%  -LM:-10%
+840  RUR1002   M_V: 9.110K   Dev:+11.1%
+Act_V: 8.200K    Std_V: 8.200K   Loc: A3
+H-Pin:204  L-Pin:1    +LM:+10%  -LM:-10%
+891  RSR35     M_V: 15.91K   Dev:-20.5%
+Act_V: 20.00K    Std_V: 20.00K   Loc: A3
+H-Pin:194  L-Pin:276  +LM:+10%  -LM:-10%
+1185 CAC15     M_V: 54.12pF  Dev:-45.9%
+Act_V:100.00pF   Std_V:100.00pF  Loc: A1
+H-Pin:462  L-Pin:41   +LM:+60%  -LM:-40%
+1486 CPCE25/C  M_V:2178.72uF  Dev:+289.1%
+Act_V:560.00uF   Std_V:560.00uF  Loc: C3
+H-Pin:1    L-Pin:517  +LM:+30%  -LM:-10%

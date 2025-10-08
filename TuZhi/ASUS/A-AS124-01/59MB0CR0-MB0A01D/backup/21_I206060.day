@@ -1,0 +1,7 @@
+!#*  BoardName=59MB0CR0-MB0A01D LotName=0 QTY_R=0 ClassNum=1
+!         Raw Retest  Total 
+Tested    120     11    131
+Accept     88      7     95
+C_Fail     27      4     31
+O_Fail      4      0      4
+S_Fail      1      0      1
