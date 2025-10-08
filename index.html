@@ -75,6 +75,11 @@
         .content {
             display: none; /* 默认隐藏文件内容 */
             margin-left: 20px; /* 为内容添加左侧缩进 */
+            padding-top: 10px;
+            padding-bottom: 10px;
+            border-left: 1px dashed #ccc;
+            margin-left: 45px; /* 与文件图标对齐 */
+            padding-left: 10px;
         }
         
         /* 为 txt 文件内容设置字体样式，使其与 docx 预览更相似 */
@@ -102,6 +107,11 @@
         .xlsx-table th {
             background-color: #f2f2f2;
             font-weight: bold;
+        }
+        
+        /* 避免 iframe 出现双重滚动条 */
+        iframe {
+            display: block;
         }
     </style>
 </head>
@@ -179,8 +189,20 @@
                                 </label>
                                 <div class="content">
                                     <h3>文档内容：xxxx.docx</h3>
-                                    <iframe src="docs/xxxx.html" width="95%" height="600px" width="95%" height="600px" ></iframe>
+                                    <iframe src="docs/xxxx.html" width="95%" height="600px" ></iframe>
                                     <p><a href="docs/xxxx.docx" download>⬇ 下载 Word 文件</a></p>
+                                </div>
+                        </li>
+                           
+                        <li class="file" data-path="docs/文件名按数字大小排序.html">
+                                <label class="node" onclick="toggleContent(this)">
+                                    <span><svg viewBox="0 0 24 24"><path d="M3 3h18v18H3z" stroke="currentColor"/></svg></span>
+                                    <span class="name">文件名按数字大小排序.docx</span>
+                                </label>
+                                <div class="content">
+                                    <h3>文档内容：文件名按数字大小排序.docx</h3>
+                                    <iframe src="docs/文件名按数字大小排序.html" width="95%" height="600px" ></iframe>
+                                    <p><a href="docs/文件名按数字大小排序.docx" download>⬇ 下载 Word 文件</a></p>
                                 </div>
                         </li>
                         
@@ -191,7 +213,7 @@
                                 </label>
                                 <div class="content">
                                     <h3>文档内容：华硕主板.CAP的BIOS程序无法使用编程器的问题.docx</h3>
-                                    <iframe src="docs/华硕主板.CAP的BIOS程序无法使用编程器的问题.html" width="95%" height="600px" width="95%" height="600px" ></iframe>
+                                    <iframe src="docs/华硕主板.CAP的BIOS程序无法使用编程器的问题.html" width="95%" height="600px" ></iframe>
                                     <p><a href="docs/华硕主板.CAP的BIOS程序无法使用编程器的问题.docx" download>⬇ 下载 Word 文件</a></p>
                                 </div>
                         </li>
@@ -203,7 +225,7 @@
                                 </label>
                                 <div class="content">
                                     <h3>文档内容：asus华硕主板刷bios上NvME硬盘-亲自尝试.docx</h3>
-                                    <iframe src="docs/asus华硕主板刷bios上NvME硬盘-亲自尝试.html" width="95%" height="600px" width="95%" height="600px" ></iframe>
+                                    <iframe src="docs/asus华硕主板刷bios上NvME硬盘-亲自尝试.html" width="95%" height="600px" ></iframe>
                                     <p><a href="docs/asus华硕主板刷bios上NvME硬盘-亲自尝试.docx" download>⬇ 下载 Word 文件</a></p>
                                 </div>
                         </li>
@@ -215,11 +237,11 @@
                                 </label>
                                 <div class="content">
                                     <h3>文档内容：ASUS Essentio CM6630(P8H61)) 加裝 Nvme SSD.docx</h3>
-                                    <iframe src="docs/ASUS Essentio CM6630(P8H61)) 加裝 Nvme SSD.html" width="95%" height="600px" width="95%" height="600px" ></iframe>
+                                    <iframe src="docs/ASUS Essentio CM6630(P8H61)) 加裝 Nvme SSD.html" width="95%" height="600px" ></iframe>
                                     <p><a href="docs/ASUS Essentio CM6630(P8H61)) 加裝 Nvme SSD.docx" download>⬇ 下载 Word 文件</a></p>
                                 </div>
                         </li>
-                       
+                        
                         <li class="file" data-path="docs/键盘截屏.html">
                             <label class="node" onclick="toggleContent(this)">
                                 <span><svg viewBox="0 0 24 24"><path d="M3 3h18v18H3z" stroke="currentColor"/></svg></span>
@@ -239,7 +261,7 @@
                                 </label>
                                 <div class="content">
                                     <h3>文档内容：土豪金编程器教程.docx</h3>
-                                    <iframe src="docs/土豪金编程器教程.html" width="95%" height="600px" width="95%" height="600px" ></iframe>
+                                    <iframe src="docs/土豪金编程器教程.html" width="95%" height="600px" ></iframe>
                                     <p><a href="docs/土豪金编程器教程.docx" download>⬇ 下载 Word 文件</a></p>
                                 </div>
                         </li>
@@ -251,8 +273,7 @@
                             </label>
                             <div class="content">
                                 <h3>PDF 内容：显示器电路图英汉对照表.pdf</h3>
-                                    <iframe src="docs/显示器电路图英汉对照表.pdf" width="95%" height="800px" ></iframe><!--title="Google chrome谷歌浏览器启用多线程下载功能教程.docx PDF 预览"
-                                        style="width: 95%; height: 700px; border: 1px solid #ccc; overflow: auto;"-->
+                                    <iframe src="docs/显示器电路图英汉对照表.pdf" width="95%" height="800px" ></iframe>
                                     <p><a href="docs/Google chrome谷歌浏览器启用多线程下载功能教程.docx" download>⬇ 下载 Word 文件</a></p>
                             </div>
                         </li>
@@ -264,7 +285,7 @@
                                 </label>
                                 <div class="content">
                                     <h3>文档内容：修改BIOS支援PCIE NVME SSD.docx</h3>
-                                    <iframe src="docs/修改BIOS支援PCIE NVME SSD.html" width="95%" height="600px" width="95%" height="600px" ></iframe>
+                                    <iframe src="docs/修改BIOS支援PCIE NVME SSD.html" width="95%" height="600px" ></iframe>
                                     <p><a href="docs/修改BIOS支援PCIE NVME SSD.docx" download>⬇ 下载 Word 文件</a></p>
                                 </div>
                         </li>
@@ -288,7 +309,7 @@
                                 </label>
                                 <div class="content">
                                     <h3>文档内容：CH341A编程器-NeoProgrammer软件-OTP读写教程.docx</h3>
-                                    <iframe src="docs/CH341A编程器-NeoProgrammer软件-OTP读写教程.html" width="95%" height="600px" width="95%" height="600px" ></iframe>
+                                    <iframe src="docs/CH341A编程器-NeoProgrammer软件-OTP读写教程.html" width="95%" height="600px" ></iframe>
                                     <p><a href="docs/CH341A编程器-NeoProgrammer软件-OTP读写教程.docx" download>⬇ 下载 Word 文件</a></p>
                                 </div>
                         </li>
@@ -304,7 +325,7 @@
                                         style="width: 95%; height:970px; border: 1px solid #ccc; overflow: auto;"></iframe>
                             </div>
                         </li>
-                     
+                    
                         <li class="file" data-path="docs/GitHub Pages 部署步骤.html">
                             <label class="node" onclick="toggleContent(this)">
                                 <span><svg viewBox="0 0 24 24"><path d="M3 3h18v18H3z" stroke="currentColor"/></svg></span>
@@ -319,16 +340,14 @@
                         
                         <li class="file" data-path="docs/Google chrome谷歌浏览器启用多线程下载功能教程.html"> 
                                 <label class="node" onclick="toggleContent(this)">
-                                   <span><svg viewBox="0 0 24 24"><path d="M3 3h18v18H3z" stroke="currentColor"/></svg></span>
-                                   <span class="name">Google chrome谷歌浏览器启用多线程下载功能教程.docx</span>
+                                    <span><svg viewBox="0 0 24 24"><path d="M3 3h18v18H3z" stroke="currentColor"/></svg></span>
+                                    <span class="name">Google chrome谷歌浏览器启用多线程下载功能教程.docx</span>
                                 </label>
                                 <div class="content">
                                     <h3>Word内容：Google chrome谷歌浏览器启用多线程下载功能教程.txt</h3>
                                     <iframe src="docs/Google chrome谷歌浏览器启用多线程下载功能教程.html" width="95%" height="170px" ></iframe>
-								                        <!--title="Google chrome谷歌浏览器启用多线程下载功能教程.docx 转网页"border: 1px solid #ccc; overflow: auto;" -->
                                     <h3>PDF 内容：Google chrome谷歌浏览器启用多线程下载功能教程.pdf</h3>
-                                    <iframe src="docs/Google chrome谷歌浏览器启用多线程下载功能教程.pdf" width="95%" height="800px" ></iframe><!--title="Google chrome谷歌浏览器启用多线程下载功能教程.docx PDF 预览"
-                                        style="width: 95%; height: 700px; border: 1px solid #ccc; overflow: auto;"-->
+                                    <iframe src="docs/Google chrome谷歌浏览器启用多线程下载功能教程.pdf" width="95%" height="800px" ></iframe>
                                     <p><a href="docs/Google chrome谷歌浏览器启用多线程下载功能教程.docx" download>⬇ 下载 Word 文件</a></p>
                                 </div>
                         </li>
@@ -368,12 +387,11 @@
                             </label>
                             <div class="content">
                                 <h3>PDF 内容：MS-DOS 命令速查表.pdf</h3>
-                                    <iframe src="docs/MS-DOS 命令速查表.pdf" width="95%" height="800px" ></iframe><!--title="Google chrome谷歌浏览器启用多线程下载功能教程.docx PDF 预览"
-                                        style="width: 95%; height: 700px; border: 1px solid #ccc; overflow: auto;"-->
+                                    <iframe src="docs/MS-DOS 命令速查表.pdf" width="95%" height="800px" ></iframe>
                                     <p><a href="docs/Google chrome谷歌浏览器启用多线程下载功能教程.docx" download>⬇ 下载 Word 文件</a></p>
                             </div>
                         </li>
-						
+                        
                         <li class="file" data-path="docs/Notepad++使用集合.html">
                             <label class="node" onclick="toggleContent(this)">
                                 <span><svg viewBox="0 0 24 24"><path d="M3 3h18v18H3z" stroke="currentColor"/></svg></span>
@@ -389,7 +407,7 @@
                                 <p><a href="docs/Notepad++使用集合.docx" download>⬇ 下载 Word 文件</a></p>
                             </div>
                         </li>
-						
+                        
                         <li class="file" data-path="docs/ode_下载说明.txt">
                             <label class="node" onclick="toggleContent(this)">
                                 <span><svg viewBox="0 0 24 24"><path d="M3 3h18v18H3z" stroke="currentColor"/></svg></span>
@@ -407,20 +425,20 @@
                                 </label>
                                 <div class="content">
                                     <h3>文档内容：ping命令技巧详解 windows下ping命令知识大全.docx</h3>
-                                    <iframe src="docs/ping命令技巧详解 windows下ping命令知识大全.html" width="95%" height="600px" width="95%" height="600px" ></iframe>
+                                    <iframe src="docs/ping命令技巧详解 windows下ping命令知识大全.html" width="95%" height="600px" ></iframe>
                                     <p><a href="docs/ping命令技巧详解 windows下ping命令知识大全.docx" download>⬇ 下载 Word 文件</a></p>
                                 </div>
                         </li>
                         
-                        <li class="file" data-path="docs/protel 99se  汉化版.html">
+                        <li class="file" data-path="docs/protel 99se  汉化版.html">
                                 <label class="node" onclick="toggleContent(this)">
                                     <span><svg viewBox="0 0 24 24"><path d="M3 3h18v18H3z" stroke="currentColor"/></svg></span>
-                                    <span class="name">protel 99se  汉化版.docx</span>
+                                    <span class="name">protel 99se  汉化版.docx</span>
                                 </label>
                                 <div class="content">
-                                    <h3>文档内容：protel 99se  汉化版.docx</h3>
-                                    <iframe src="docs/protel 99se  汉化版.html" width="95%" height="600px" width="95%" height="600px" ></iframe>
-                                    <p><a href="docs/protel 99se  汉化版.docx" download>⬇ 下载 Word 文件</a></p>
+                                    <h3>文档内容：protel 99se  汉化版.docx</h3>
+                                    <iframe src="docs/protel 99se  汉化版.html" width="95%" height="600px" ></iframe>
+                                    <p><a href="docs/protel 99se  汉化版.docx" download>⬇ 下载 Word 文件</a></p>
                                 </div>
                         </li>
                         
@@ -431,7 +449,7 @@
                                 </label>
                                 <div class="content">
                                     <h3>文档内容：PuTTY中文版安装步骤.docx </h3>
-                                    <iframe src="docs/PuTTY中文版安装步骤.html" width="95%" height="600px" width="95%" height="600px" ></iframe>
+                                    <iframe src="docs/PuTTY中文版安装步骤.html" width="95%" height="600px" ></iframe>
                                     <p><a href="docs/PuTTY中文版安装步骤.docx" download>⬇ 下载 Word 文件</a></p>
                                 </div>
                         </li>
@@ -447,7 +465,7 @@
                                         style="width: 95%; height:400px; border: 1px solid #ccc; overflow: auto;"></iframe>
                             </div>
                         </li>
-                  
+                    
                         <li class="file" data-path="docs/py打包脚本.exe.html">
                             <label class="node" onclick="toggleContent(this)">
                                 <span><svg viewBox="0 0 24 24"><path d="M3 3h18v18H3z" stroke="currentColor"/></svg></span>
@@ -467,7 +485,7 @@
                                 </label>
                                 <div class="content">
                                     <h3>文档内容：python教程说明书.docx</h3>
-                                    <iframe src="docs/python教程说明书.html" width="95%" height="600px" width="95%" height="600px" ></iframe>
+                                    <iframe src="docs/python教程说明书.html" width="95%" height="600px" ></iframe>
                                     <p><a href="docs/python教程说明书.docx" download>⬇ 下载 Word 文件</a></p>
                                 </div>
                         </li>
@@ -518,578 +536,88 @@
                                 <iframe src="docs/VSCode_back.html" title="VSCode_back.html 转网页"
                                         style="width: 95%; height:700px; border: 1px solid #ccc; overflow: auto;"></iframe>
                                 <h3>PDF内容：VSCode_back.pdf
-                                </label></h3>
+                            </label></h3>
                                 <iframe src="docs/VSCode_back.pdf" title="VSCode_back PDF 预览" 
-                                        style="width: 95%; height: 1500px; border: 1px solid #ccc; overflow: auto;"></iframe>
+                                        style="width: 95%; height: 700px; border: 1px solid #ccc; overflow: auto;"></iframe>
                                 <p><a href="docs/VSCode_back.docx" download>⬇ 下载 Word 文件</a></p>
-                            </div>        
-                        </li>
-                        
-                        <li class="file" data-path="VM安装windows7 32位.html">
-                                <label class="node" onclick="toggleContent(this)">
-                                    <span><svg viewBox="0 0 24 24"><path d="M3 3h18v18H3z" stroke="currentColor"/></svg></span>
-                                    <span class="name">VM安装windows7 32位.docx</span>
-                                </label>
-                                <div class="content">
-                                    <h3>文档内容：VM安装windows7 32位.docx</h3>
-                                    <iframe src="docs/VM安装windows7 32位.html" width="95%" height="600px" width="95%" height="600px" ></iframe>
-                                    <p><a href="docs/VM安装windows7 32位.docx" download>⬇ 下载 Word 文件</a></p>
-                                </div>
-                        </li>
-                        
-                        <li class="file" data-path="win7查看环境变量的详细步骤(图文).html">
-                                <label class="node" onclick="toggleContent(this)">
-                                    <span><svg viewBox="0 0 24 24"><path d="M3 3h18v18H3z" stroke="currentColor"/></svg></span>
-                                    <span class="name">win7查看环境变量的详细步骤(图文).doc</span>
-                                </label>
-                                <div class="content">
-                                    <h3>文档内容：win7查看环境变量的详细步骤(图文).doc</h3>
-                                    <iframe src="docs/win7查看环境变量的详细步骤(图文).html" width="95%" height="600px" width="95%" height="600px" ></iframe>
-                                    <p><a href="docs/win7查看环境变量的详细步骤(图文).docx" download>⬇ 下载 Word 文件</a></p>
-                                </div>
-                        </li>
-                        
-                        <li class="file" data-path="win7虛擬機安裝及網絡配置.html">
-                                <label class="node" onclick="toggleContent(this)">
-                                    <span><svg viewBox="0 0 24 24"><path d="M3 3h18v18H3z" stroke="currentColor"/></svg></span>
-                                    <span class="name">win7虛擬機安裝及網絡配置.docx</span>
-                                </label>
-                                <div class="content">
-                                    <h3>文档内容：win7虛擬機安裝及網絡配置.docx</h3>
-                                    <iframe src="docs/win7虛擬機安裝及網絡配置.html" width="95%" height="600px" width="95%" height="600px" ></iframe>
-                                    <p><a href="docs/win7虛擬機安裝及網絡配置.docx" download>⬇ 下载 Word 文件</a></p>
-                                </div>
-                        </li>
-                        
-                        <li class="file" data-path="docs/WIN98 和宿主机共享文件.txt.html">
-                            <label class="node" onclick="toggleContent(this)">
-                                <span><svg viewBox="0 0 24 24"><path d="M3 3h18v18H3z" stroke="currentColor"/></svg></span>
-                                <span class="name">WIN98 和宿主机共享文件.txt</span>
-                            </label>
-                            <div class="content">
-                                <h3>文档内容：WIN98 和宿主机共享文件笔.txt</h3>
-                                <iframe src="docs/WIN98 和宿主机共享文件.txt" 
-                                        style="width: 95%; height:400px; border: 1px solid #ccc; overflow: auto;"></iframe>
                             </div>
                         </li>
-                        
-                        <li class="file" data-path="docs/win10开启微软五笔.txt.html">
-                            <label class="node" onclick="toggleContent(this)">
-                                <span><svg viewBox="0 0 24 24"><path d="M3 3h18v18H3z" stroke="currentColor"/></svg></span>
-                                <span class="name">win10开启微软五笔.txt</span>
-                            </label>
-                            <div class="content">
-                                <h3>文档内容：win10开启微软五笔.txt</h3>
-                                <iframe src="docs/win10开启微软五笔.txt" 
-                                        style="width: 95%; height:400px; border: 1px solid #ccc; overflow: auto;"></iframe>
-                            </div>
-                        </li>
-                        
-                        <li class="file" data-path="docs/win10怎么找回自带的windows照片查看器.html">
-                            <label class="node" onclick="toggleContent(this)">
-                                <span><svg viewBox="0 0 24 24"><path d="M3 3h18v18H3z" stroke="currentColor"/></svg></span>
-                                <span class="name">win10怎么找回自带的windows照片查看器.docx</span>
-                            </label>
-                            <div class="content">
-                                <h3>word内容：win10怎么找回自带的windows照片查看器.txt</h3>
-                                <iframe src="docs/win10怎么找回自带的windows照片查看器.html" title="win10怎么找回自带的windows照片查看器.docx 转网页"
-                                        style="width: 95%; height:400px; border: 1px solid #ccc; overflow: auto;"></iframe>
-                                <h3>PDF内容：win10怎么找回自带的windows照片查看器.pdf
-                            </label></h3>
-                                <iframe src="docs/win10怎么找回自带的windows照片查看器.pdf" title="win10怎么找回自带的windows照片查看器.docx PDF 预览" 
-                                        style="width: 95%; height: 1500px; border: 1px solid #ccc; overflow: auto;"></iframe>
-                                <p><a href="docs/win10怎么找回自带的windows照片查看器.docx" download>⬇ 下载 Word 文件</a></p>
-                            </div>
-                        </li>
-                        
-                        <li class="file" data-path="docs/WIN11的鼠标右键恢复到WIN10.html">
-                            <label class="node" onclick="toggleContent(this)">
-                                <span><svg viewBox="0 0 24 24"><path d="M3 3h18v18H3z" stroke="currentColor"/></svg></span>
-                                <span class="name">WIN11的鼠标右键恢复到WIN10.txt</span>
-                            </label>
-                            <div class="content">
-                                <h3>文档内容：WIN11的鼠标右键恢复到WIN10.txt</h3>
-                                <iframe src="docs/WIN11的鼠标右键恢复到WIN10.txt" 
-                                        style="width: 95%; height:400px; border: 1px solid #ccc; overflow: auto;"></iframe>
-                            </div>
-                        </li>
-                        
-                        <li class="file" data-path="docs/win版本序列号位置.html">
-                            <label class="node" onclick="toggleContent(this)">
-                                <span><svg viewBox="0 0 24 24"><path d="M3 3h18v18H3z" stroke="currentColor"/></svg></span>
-                                <span class="name">win版本序列号位置.txt</span>
-                            </label>
-                            <div class="content">
-                                <h3>文档内容：win版本序列号位置.txt</h3>
-                                <iframe src="docs/win版本序列号位置.txt" 
-                                        style="width: 95%; height:400px; border: 1px solid #ccc; overflow: auto;"></iframe>
-                            </div>
-                        </li>
-                        
-                        <li class="file" data-path="docs/win系统下载.txt.html">
-                            <label class="node" onclick="toggleContent(this)">
-                                <span><svg viewBox="0 0 24 24"><path d="M3 3h18v18H3z" stroke="currentColor"/></svg></span>
-                                <span class="name">win系统下载.txt</span>
-                            </label>
-                            <div class="content">
-                                <h3>文档内容：win系统下载.txt</h3>
-                                <iframe src="docs/win系统下载.txt" 
-                                        style="width: 95%; height:400px; border: 1px solid #ccc; overflow: auto;"></iframe>
-                            </div>
-                        </li>
-                        
-                        <li class="file" data-path="docs/Windows XP（64位）：[1]安装语言包.html">
-                            <label class="node" onclick="toggleContent(this)">
-                                <span><svg viewBox="0 0 24 24"><path d="M3 3h18v18H3z" stroke="currentColor"/></svg></span>
-                                <span class="name">Windows XP（64位）：[1]安装语言包.docx</span>
-                            </label>
-                            <div class="content">
-                                <h3>word内容：Windows XP（64位）：[1]安装语言包.docx</h3>
-                                <iframe src="docs/Windows XP（64位）：[1]安装语言包.html" title="Windows XP（64位）：[1]安装语言包.docx 转网页"
-                                        style="width: 95%; height:600px; border: 1px solid #ccc; overflow: auto;"></iframe>
-                                <h3>PDF内容：Windows XP（64位）：[1]安装语言包.pdf
-                            </label></h3>
-                                <iframe src="docs/Windows XP（64位）：[1]安装语言包.pdf" title="Windows XP（64位）：[1]安装语言包.docx PDF 预览" 
-                                        style="width: 95%; height: 1500px; border: 1px solid #ccc; overflow: auto;"></iframe>
-                                <p><a href="docs/Windows XP（64位）：[1]安装语言包.docx" download>⬇ 下载 Word 文件</a></p>
-                            </div>
-                        </li>
-                        
-                        <li class="file" data-path="docs/XLSX背景隔行显灰色.html">
-                            <label class="node" onclick="toggleContent(this)">
-                                <span><svg viewBox="0 0 24 24"><path d="M3 3h18v18H3z" stroke="currentColor"/></svg></span>
-                                <span class="name">XLSX背景隔行显灰色.txt</span>
-                            </label>
-                            <div class="content">
-                                <h3>文档内容：XLSX背景隔行显灰色.txt</h3>
-                                <iframe src="docs/XLSX背景隔行显灰色.txt" 
-                                        style="width: 95%; height:400px; border: 1px solid #ccc; overflow: auto;"></iframe>
-                            </div>
-                        </li>
-                        
-						<li class="file" data-path="docs/xlsx转html脚本.html">
-                            <label class="node" onclick="toggleContent(this)">
-                                <span><svg viewBox="0 0 24 24"><path d="M3 3h18v18H3z" stroke="currentColor"/></svg></span>
-                                <span class="name">xlsx转html脚本.txt</span>
-                            </label>
-                            <div class="content">
-                                <h3>文档内容：xlsx转html脚本.txt</h3>
-                                <iframe src="docs/xlsx转html脚本.txt" 
-                                        style="width: 95%; height:900px; border: 1px solid #ccc; overflow: auto;"></iframe>
-                            </div>
-                        </li>
-                        
-                        <li class="file" data-path="docs/Youtube-dl 详细使用教程.html">
-                            <label class="node" onclick="toggleContent(this)">
-                                <span><svg viewBox="0 0 24 24"><path d="M3 3h18v18H3z" stroke="currentColor"/></svg></span>
-                                <span class="name">Youtube-dl 详细使用教程.docx</span>
-                            </label>
-                            <div class="content">
-                                <h3>word内容：Youtube-dl 详细使用教程.docx</h3>
-                                <iframe src="docs/Youtube-dl 详细使用教程.html" title="Youtube-dl 详细使用教程.docx 转网页"
-                                        style="width: 95%; height:600px; border: 1px solid #ccc; overflow: auto;"></iframe>
-                                <h3>PDF内容：Youtube-dl 详细使用教程.pdf
-                            </label></h3>
-                                <iframe src="docs/Youtube-dl 详细使用教程.pdf" title="Youtube-dl 详细使用教程.docx PDF 预览" 
-                                        style="width: 95%; height: 1500px; border: 1px solid #ccc; overflow: auto;"></iframe>
-                                <p><a href="docs/Youtube-dl 详细使用教程.docx" download>⬇ 下载 Word 文件</a></p>
-                            </div>
-                        </li>
- 
                     </ul>
                 </li>
             </ul>
         </li>
     </ul>
-    
-    <ul>
-        <li class="folder">
-            <input id="g1" type="checkbox" checked>
-            <label for="g1" class="node">
-                <span class="chev"><svg viewBox="0 0 24 24"><path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2" fill="none"/></svg></span>
-                <span><svg viewBox="0 0 24 24"><path d="M3 4h18v18H3z" stroke="currentColor"/></svg></span>
-                <span class="name">LED</span>
-            </label>
-                <ul>
-                    <li class="folder">
-                        <input id="g2" type="checkbox" checked>
-                        <label for="g2" class="node">
-                            <span class="chev"><svg viewBox="0 0 24 24"><path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2" fill="none"/></svg></span>
-                            <span><svg viewBox="0 0 24 24"><path d="M7 3h10l4 4v14H7z" stroke="currentColor"/></svg></span>
-                            <span class="name">LED(按名称排序)</span>
-                        </label>
-                    
-                        <ul id="led-list">
 
-                            <li class="file" data-path="pdf/飞科电吹风.pdf">
-                            <label class="node" onclick="toggleContent(this)">
-                                <span><svg viewBox="0 0 24 24"><path d="M3 3h18v18H3z" stroke="currentColor"/></svg></span>
-                                <span class="name">飞科电吹风.pdf></iframe></span>
-                            </label>
-                            <div class="content">
-							    <!--用 <iframe> 直接嵌入-->
-                                <iframe src="pdf/飞科电吹风.pdf" width="95%" height="800px"></iframe>
-								<p><a href="pdf/飞科电吹风.pdf" download>⬇ 下载 pdf 文件</a></p>
-                             </div>
-                            </li>
-                             
-                            <li class="file" data-path="led/ATX开关电源原理与检修.pdf">
-                            <label class="node" onclick="toggleContent(this)">
-                                <span><svg viewBox="0 0 24 24"><path d="M3 3h18v18H3z" stroke="currentColor"/></svg></span>
-                                <span class="name">ATX开关电源原理与检修.pdf></iframe></span>
-                            </label>
-                            <div class="content">
-                                <iframe src="led/ATX开关电源原理与检修.pdf" width="95%" height="800px"></iframe>
-								<p><a href="led/ATX开关电源原理与检修.pdf" download>⬇ 下载 pdf 文件</a></p>
-                             </div>
-                            </li>
-                            
-                            <li class="file" data-path="led/ATX开关电源维修详解.pdf">
-                            <label class="node" onclick="toggleContent(this)">
-                                <span><svg viewBox="0 0 24 24"><path d="M3 3h18v18H3z" stroke="currentColor"/></svg></span>
-                                <span class="name">ATX开关电源维修详解.pdf></iframe></span>
-                            </label>
-                            <div class="content">
-                                <iframe src="led/ATX开关电源维修详解.pdf" width="95%" height="800px"></iframe>
-								<p><a href="led/ATX开关电源维修详解.pdf" download>⬇ 下载 pdf 文件</a></p>
-                             </div>
-                            </li>
-                        
-                            <li class="file" data-path="led/LED_BP9021.pdf">
-                            <label class="node" onclick="toggleContent(this)">
-                                <span><svg viewBox="0 0 24 24"><path d="M3 3h18v18H3z" stroke="currentColor"/></svg></span>
-                                <span class="name">LED_BP9021.pdf></iframe></span>
-                            </label>
-                            <div class="content">
-                                <iframe src="led/LED_BP9021.pdf" width="95%" height="800px"></iframe>
-								<p><a href="led/LED_BP9021.pdf" download>⬇ 下载 pdf 文件</a></p>
-                             </div>
-                            </li>
-                            
-                            <li class="file" data-path="led/LED_BP9022.pdf">
-                            <label class="node" onclick="toggleContent(this)">
-                                <span><svg viewBox="0 0 24 24"><path d="M3 3h18v18H3z" stroke="currentColor"/></svg></span>
-                                <span class="name">LED_BP9022.pdf></iframe></span>
-                            </label>
-                            <div class="content">
-                                <iframe src="led/LED_BP9022.pdf" width="95%" height="800px"></iframe>
-								<p><a href="led/LED_BP9022.pdf" download>⬇ 下载 pdf 文件</a></p>
-                             </div>
-                            </li>
-                            
-                            <li class="file" data-path="led/LED_BP9916c.pdf">
-                            <label class="node" onclick="toggleContent(this)">
-                                <span><svg viewBox="0 0 24 24"><path d="M3 3h18v18H3z" stroke="currentColor"/></svg></span>
-                                <span class="name">LED_BP9916c.pdf></iframe></span>
-                            </label>
-                            <div class="content">
-                                <iframe src="led/LED_BP9916c.pdf" width="95%" height="800px"></iframe>
-								<p><a href="led/LED_BP9916c.pdf" download>⬇ 下载 pdf 文件</a></p>
-                             </div>
-                            </li>
-                            
-                            <li class="file" data-path="led/LED_MC5833-SINOMCU.pdf">
-                            <label class="node" onclick="toggleContent(this)">
-                                <span><svg viewBox="0 0 24 24"><path d="M3 3h18v18H3z" stroke="currentColor"/></svg></span>
-                                <span class="name">LED_MC5833-SINOMCU.pdf></iframe></span>
-                            </label>
-                            <div class="content">
-                                <iframe src="led/LED_MC5833-SINOMCU.pdf" width="95%" height="800px"></iframe>
-								<p><a href="led/LED_MC5833-SINOMCU.pdf" download>⬇ 下载 pdf 文件</a></p>
-                             </div>
-                            </li>
-                            
-                            <li class="file" data-path="led/LED_OCP8192B-OrientChip.pdf">
-                            <label class="node" onclick="toggleContent(this)">
-                                <span><svg viewBox="0 0 24 24"><path d="M3 3h18v18H3z" stroke="currentColor"/></svg></span>
-                                <span class="name">LED_OCP8192B-OrientChip.pdf></iframe></span>
-                            </label>
-                            <div class="content">
-                                <iframe src="led/LED_OCP8192B-OrientChip.pdf" width="95%" height="800px"></iframe>
-								<p><a href="led/LED_OCP8192B-OrientChip.pdf" download>⬇ 下载 pdf 文件</a></p>
-                             </div>
-                            </li>
-                            
-                            <li class="file" data-path="led/LED_OCP8193.pdf">
-                            <label class="node" onclick="toggleContent(this)">
-                                <span><svg viewBox="0 0 24 24"><path d="M3 3h18v18H3z" stroke="currentColor"/></svg></span>
-                                <span class="name">LED_OCP8193.pdf></iframe></span>
-                            </label>
-                            <div class="content">
-                                <iframe src="led/LED_OCP8193.pdf" width="95%" height="800px"></iframe>
-								<p><a href="led/LED_OCP8193.pdf" download>⬇ 下载 pdf 文件</a></p>
-                             </div>
-                            </li>
-                            
-                            <li class="file" data-path="led/.LED_REN_icl7611-12_DST_20040915pdf">
-                            <label class="node" onclick="toggleContent(this)">
-                                <span><svg viewBox="0 0 24 24"><path d="M3 3h18v18H3z" stroke="currentColor"/></svg></span>
-                                <span class="name">LED_REN_icl7611-12_DST_20040915.pdf></iframe></span>
-                            </label>
-                            <div class="content">
-                                <iframe src="led/LED_REN_icl7611-12_DST_20040915.pdf" width="95%" height="800px"></iframe>
-								<p><a href="led/LED_REN_icl7611-12_DST_20040915.pdf" download>⬇ 下载 pdf 文件</a></p>
-                             </div>
-                            </li>
-                            
-                            <li class="file" data-path="led/LED_RT9199.pdf">
-                            <label class="node" onclick="toggleContent(this)">
-                                <span><svg viewBox="0 0 24 24"><path d="M3 3h18v18H3z" stroke="currentColor"/></svg></span>
-                                <span class="name">LED_RT9199.pdf></iframe></span>
-                            </label>
-                            <div class="content">
-                                <iframe src="led/LED_RT9199.pdf" width="95%" height="800px"></iframe>
-								<p><a href="led/LED_RT9199.pdf" download>⬇ 下载 pdf 文件</a></p>
-                             </div>
-                            </li>
-                            
-                            <li class="file" data-path="led/LED_RT9619A.pdf">
-                            <label class="node" onclick="toggleContent(this)">
-                                <span><svg viewBox="0 0 24 24"><path d="M3 3h18v18H3z" stroke="currentColor"/></svg></span>
-                                <span class="name">LED_RT9619A.pdf></iframe></span>
-                            </label>
-                            <div class="content">
-                                <iframe src="led/LED_RT9619A.pdf" width="95%" height="800px"></iframe>
-								<p><a href="led/LED_RT9619A.pdf" download>⬇ 下载 pdf 文件</a></p>
-                             </div>
-                            </li>
-                            
-                            <li class="file" data-path="led/LED_SDH771XRL.pdf">
-                            <label class="node" onclick="toggleContent(this)">
-                                <span><svg viewBox="0 0 24 24"><path d="M3 3h18v18H3z" stroke="currentColor"/></svg></span>
-                                <span class="name">LED_SDH771XRL.pdf></iframe></span>
-                            </label>
-                            <div class="content">
-                                <iframe src="led/LED_SDH771XRL.pdf" width="95%" height="800px"></iframe>
-								<p><a href="led/LED_SDH771XRL.pdf" download>⬇ 下载 pdf 文件</a></p>
-                             </div>
-                            </li>
-                            
-                            <li class="file" data-path="led/LED_SDH7611ASH.pdf">
-                            <label class="node" onclick="toggleContent(this)">
-                                <span><svg viewBox="0 0 24 24"><path d="M3 3h18v18H3z" stroke="currentColor"/></svg></span>
-                                <span class="name">LED_SDH7611ASH.pdf></iframe></span>
-                            </label>
-                            <div class="content">
-                                <iframe src="led/LED_SDH7611ASH.pdf" width="95%" height="800px"></iframe>
-								<p><a href="led/LED_SDH7611ASH.pdf" download>⬇ 下载 pdf 文件</a></p>
-                             </div>
-                            </li>
-                            
-                            <li class="file" data-path="led/LED_SDH7711SETR_C601113.pdf">
-                            <label class="node" onclick="toggleContent(this)">
-                                <span><svg viewBox="0 0 24 24"><path d="M3 3h18v18H3z" stroke="currentColor"/></svg></span>
-                                <span class="name">LED_SDH7711SETR_C601113.pdf></iframe></span>
-                            </label>
-                            <div class="content">
-                                <iframe src="led/LED_SDH7711SETR_C601113.pdf" width="95%" height="800px"></iframe>
-								<p><a href="led/LED_SDH7711SETR_C601113.pdf" download>⬇ 下载 pdf 文件</a></p>
-                             </div>
-                            </li>
-                            
-                            <li class="file" data-path="led/LED吸顶灯双色.pdf">
-                            <label class="node" onclick="toggleContent(this)">
-                                <span><svg viewBox="0 0 24 24"><path d="M3 3h18v18H3z" stroke="currentColor"/></svg></span>
-                                <span class="name">LED吸顶灯双色.pdf></iframe></span>
-                            </label>
-                            <div class="content">
-                                <iframe src="led/LED吸顶灯双色.pdf" width="95%" height="800px"></iframe>
-								<p><a href="led/LED吸顶灯双色.pdf" download>⬇ 下载 pdf 文件</a></p>
-                             </div>
-                            </li>
-                        
-                            <li class="file" data-path="led/LED_DP951X_REV1.0 CN.pdf">
-                            <label class="node" onclick="toggleContent(this)">
-                                <span><svg viewBox="0 0 24 24"><path d="M3 3h18v18H3z" stroke="currentColor"/></svg></span>
-                                <span class="name">LED_DP951X_REV1.0 CN.pdf></iframe></span>
-                            </label>
-                            <div class="content">
-                                <iframe src="led/LED_DP951X_REV1.0 CN.pdf" width="95%" height="800px"></iframe>
-								<p><a href="led/LED_DP951X_REV1.0 CN.pdf" download>⬇ 下载 pdf 文件</a></p>
-                             </div>
-                            </li>                        
-                    
-                            <li class="file" data-path="led/LED_25W_MC5833DE.pdf">
-                                <label class="node" onclick="toggleContent(this)">
-                                    <span><svg viewBox="0 0 24 24"><path d="M3 3h18v18H3z" stroke="currentColor"/></svg></span>
-                                    <span class="name">LED_25W_MC5833DE.pdf></iframe></span>
-                                </label>
-                                <div class="content">
-                                    <iframe src="led/LED_25W_MC5833DE.pdf" width="95%" height="800px"></iframe>
-                                    <p><a href="led/LED_25W_MC5833DE.pdf" download>⬇ 下载 pdf 文件</a></p>
-                                 </div>
-                            </li>
-                            
-                            <li class="file" data-path="pdf/MC-IH-M02-B3.pdf">
-                                <label class="node" onclick="toggleContent(this)">
-                                    <span><svg viewBox="0 0 24 24"><path d="M3 3h18v18H3z" stroke="currentColor"/></svg></span>
-                                    <span class="name">MC-IH-M02-B3.pdf></iframe></span>
-                                </label>
-                                <div class="content">
-                                    <iframe src="pdf/MC-IH-M02-B3.pdf" width="95%" height="800px"></iframe>
-                                    <p><a href="pdf/MC-IH-M02-B3.pdf" download>⬇ 下载 pdf 文件</a></p>
-                                 </div>
-                            </li>
-                            
-                            <li class="file" data-path="pdf/Type-c port.xlsx">
-                            <label class="node" onclick="toggleContent(this)">
-                                <span><svg viewBox="0 0 24 24"><path d="M3 3h18v18H3z" stroke="currentColor"/></svg></span>
-                                <span class="name">Type-c port.xlsx</span>
-                            </label>
-                            <div class="content">
-                                <h3>Type-C 端口引脚定义</h3>
-                                <table class="xlsx-table">
-                                    <thead>
-                                        <tr>
-                                            <th></th><th>A</th><th>B</th><th>C</th><th>D</th><th>E</th><th>F</th><th>G</th><th>H</th><th>I</th><th>J</th><th>K</th><th>L</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td>1</td><td>A1</td><td>A2</td><td>A3</td><td>A4</td><td>A5</td><td>A6</td><td>A7</td><td>A8</td><td>A9</td><td>A10</td><td>A11</td><td>A12</td>
-                                            
-                                        </tr>
-                                        <tr>
-                                            <td>2</td><td>GND</td><td>Tx1+</td><td>Tx1-</td><td>Vbus</td><td>cc1</td><td>D+</td><td>D-</td><td>Sbu1</td><td>Vbus</td><td>Rx2-</td><td>Rx2+</td><td>GND</td>
-                                        </tr>
-                                        <tr>
-                                            <td>3</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
-                                        </tr>
-                                        <tr>
-                                            <td>4</td><td>GND</td><td>Rx1+</td><td>Rx1-</td><td>Vbus</td><td>Sbu2</td><td>D-</td><td>D+</td><td>cc2</td><td>Vbus</td><td>Tx2-</td><td>Tx2+</td><td>GND</td>
-                                        </tr>
-                                        <tr>
-                                            <td>5</td><td>B12</td><td>B11</td><td>B10</td><td>B9</td><td>B8</td><td>B7</td><td>B6</td><td>B5</td><td>B4</td><td>B3</td><td>B2</td><td>B1</td>
-                                        </tr>
-                                        
-                                    </tbody>
-                                </table>
-                            </div>
-                        </li>
-                        
-                        <li class="file" data-path="led/TL431可调并联稳压电路图.html"> 
-                                <label class="node" onclick="toggleContent(this)">
-                                   <span><svg viewBox="0 0 24 24"><path d="M3 3h18v18H3z" stroke="currentColor"/></svg></span>
-                                   <span class="name">TL431可调并联稳压电路图.docx</span>
-                                </label>
-                                <div class="content">
-                                    <h3>Word内容：TL431可调并联稳压电路图.txt</h3>
-                                    <iframe src="led/TL431可调并联稳压电路图.html" width="95%" height="600px" ></iframe>
-								                        <!--title="TL431可调并联稳压电路图.docx 转网页"border: 1px solid #ccc; overflow: auto;" -->
-                                    <h3>PDF 内容：TL431可调并联稳压电路图.pdf</h3>
-                                    <iframe src="led/TL431可调并联稳压电路图.pdf" width="95%" height="800px" ></iframe><!--title="Google chrome谷歌浏览器启用多线程下载功能教程.docx PDF 预览"
-                                        style="width: 95%; height: 700px; border: 1px solid #ccc; overflow: auto;"-->
-                                    <p><a href="led/TL431可调并联稳压电路图.docx" download>⬇ 下载 Word 文件</a></p>
-                                </div>
-                        </li>
-                        
-                        </ul>   
-                     </li>      
-                </ul>
-        </li>
-    </ul>
-    
-    <ul>
-        <li class="folder">
-            <input id="h1" type="checkbox" checked>
-            <label for="h1" class="node">
-                <span class="chev"><svg viewBox="0 0 24 24"><path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2" fill="none"/></svg></span>
-                <span><svg viewBox="0 0 24 24"><path d="M3 4h18v18H3z" stroke="currentColor"/></svg></span>
-                <span class="name">PDF</span>
-            </label>
-                <ul>
-                    <li class="folder">
-                        <input id="h2" type="checkbox" checked>
-                        <label for="h2" class="node">
-                            <span class="chev"><svg viewBox="0 0 24 24"><path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2" fill="none"/></svg></span>
-                            <span><svg viewBox="0 0 24 24"><path d="M7 3h10l4 4v14H7z" stroke="currentColor"/></svg></span>
-                            <span class="name">PDF(按名称排序)</span>
-                        </label>
-                    
-                        <ul id="PDF-list">
-                        
-                        </ul>   
-                    </li>      
-                </ul>
-        </li>
-    </ul>
-    
-    
-    
     <script>
-    /**
-     * 切换文件内容的显示/隐藏状态，并隐藏其他文件的内容
-     * @param {HTMLElement} element - 被点击的元素
-     */
-    function toggleContent(element) {
-        // 获取所有文件项
-        const allFiles = document.querySelectorAll('.file');
-        // 获取当前被点击的文件项
-        const currentFile = element.closest('.file');
-
-        // 遍历所有文件项
-        allFiles.forEach(file => {
-            const contentDiv = file.querySelector('.content');
-            // 确保文件项有内容容器
-            if (contentDiv) {
-                // 如果是当前点击的文件
-                if (file === currentFile) {
-                    // 切换当前文件内容的显示状态
-                    contentDiv.style.display = (contentDiv.style.display === 'block') ? 'none' : 'block';
-                } else {
-                    // 隐藏其他文件的内容
-                    contentDiv.style.display = 'none';
-                }
-            }
-        });
-    }
-
-    // --- 文档加载完成后执行 ---
-    document.addEventListener('DOMContentLoaded', function() {
-        const docsList = document.getElementById('docs-list');
-        const ledList = document.getElementById('led-list');
-        const ledList = document.getElementById('pdf-list');
-
-        /**
-         * 处理文件列表：排序并显示文件数量
-         * @param {HTMLElement} listElement - 文件列表的父元素（如 docsList 或 ledList）
-         * @param {string} folderLabelId - 文件夹名称标签的ID，用于更新数字
-         */
-        function processFileList(listElement, folderLabelId) {
-            if (!listElement) return;
-
-            const fileItems = Array.from(listElement.children);
+        // 1. 实现文件内容显示/隐藏的函数
+        function toggleContent(labelElement) {
+            // 获取当前文件条目下的内容 div
+            const contentDiv = labelElement.nextElementSibling;
             
-            // 按照文件名对文件列表进行排序
-            fileItems.sort((a, b) => {
-                const nameA = a.querySelector('.name').innerText.toLowerCase();
-                const nameB = b.querySelector('.name').innerText.toLowerCase();
-                return nameA.localeCompare(nameB, 'zh-CN');
-            });
+            if (contentDiv && contentDiv.classList.contains('content')) {
+                // 隐藏所有其他已展开的文件内容
+                const openContents = document.querySelectorAll('#docs-list > .file > .content');
+                openContents.forEach(c => {
+                    if (c !== contentDiv) {
+                        c.style.display = 'none';
+                    }
+                });
 
-            // 将排序后的文件重新添加到 DOM 中
-            fileItems.forEach(item => listElement.appendChild(item));
-
-            // 在文件夹名称后显示文件数量
-            const folderLabel = document.querySelector(`label[for="${folderLabelId}"] .name`);
-            const fileCount = fileItems.length;
-            if (folderLabel) {
-                // 检查是否已添加过数字，避免重复添加
-                if (!folderLabel.innerText.includes(`(${fileCount})`)) {
-                    folderLabel.innerText += ` (${fileCount})`;
+                // 切换当前文件内容的显示状态
+                if (contentDiv.style.display === 'block') {
+                    contentDiv.style.display = 'none';
+                } else {
+                    contentDiv.style.display = 'block';
                 }
             }
         }
 
-        // 处理“文档”文件夹
-        processFileList(docsList, 'f2');
+        // 2. 实现文件名自然排序的功能 (处理文件名中的数字)
+        function naturalSort(a, b) {
+            const re = /(\d+)|(\D+)/g; // 匹配数字或非数字部分
+            const aParts = a.match(re) || [a];
+            const bParts = b.match(re) || [b];
 
-        // 处理“LED”文件夹
-        processFileList(ledList, 'g2');
-        
-        // 处理“PDF”文件夹
-        processFileList(docsList, 'h2');
-    });
-</script>
+            for (let i = 0; i < Math.min(aParts.length, bParts.length); i++) {
+                const aPart = aParts[i];
+                const bPart = bParts[i];
+
+                const aIsNum = !isNaN(aPart) && aPart !== '';
+                const bIsNum = !isNaN(bPart) && bPart !== '';
+
+                if (aIsNum && bIsNum) {
+                    // 都是数字，按数值大小排序
+                    const numA = parseInt(aPart, 10);
+                    const numB = parseInt(bPart, 10);
+                    if (numA !== numB) return numA - numB;
+                } else if (aIsNum || bIsNum) {
+                    // 一个是数字，一个是文本，数字排在前面
+                    return aIsNum ? -1 : 1;
+                } else {
+                    // 都是文本，按字典顺序排序
+                    const comparison = aPart.localeCompare(bPart, 'zh-CN', { sensitivity: 'base' });
+                    if (comparison !== 0) return comparison;
+                }
+            }
+            // 处理文件名部分相同的情况 (如 'file' vs 'file1')
+            return aParts.length - bParts.length;
+        }
+
+        // 3. 在页面加载完成后执行排序
+        document.addEventListener('DOMContentLoaded', () => {
+            const docsList = document.getElementById('docs-list');
+            if (docsList) {
+                // 将所有文件列表项转换为数组
+                const files = Array.from(docsList.children);
+
+                // 根据文件名进行自然排序
+                files.sort((a, b) => {
+                    const nameA = a.querySelector('.name').textContent.trim();
+                    const nameB = b.querySelector('.name').textContent.trim();
+                    return naturalSort(nameA, nameB);
+                }).forEach(file => docsList.appendChild(file)); // 将排序后的元素重新添加到列表中
+            }
+        });
+    </script>
 </body>
 </html>
