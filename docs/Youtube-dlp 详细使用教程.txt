@@ -81,8 +81,8 @@ ________________________________________
 例 ：.\yt-dlp -ix -N 5 --continue --audio-format mp3 --embed-thumbnail -o "%(playlist_index)s - %(title)s.%(ext)s" "你的歌单URL"
  **参数深度拆解**
  -x (or --extract-audio): 		 核心指令。告诉它：“我不要视频，只要音频。”
---audio-format mp3: 强制转换为 MP3。（注：YouTube 原始音频通常是 m4a 或 webm，这一步需要你电脑里装有 ffmpeg 才能转换成功）。
--o "%(title)s.%(ext)s": 命名规则。
+ --audio-format mp3: 强制转换为 MP3。（注：YouTube 原始音频通常是 m4a 或 webm，这一步需要你电脑里装有 ffmpeg 才能转换成功）。
+ -o "%(title)s.%(ext)s": 命名规则。
 %(title)s：视频标题。
 %(ext)s：后缀名。
 如果你想保留歌单里的顺序，建议改成 -o "%(playlist_index)s - %(title)s.%(ext)s"，这样下载下来文件名开头就是 01, 02...
