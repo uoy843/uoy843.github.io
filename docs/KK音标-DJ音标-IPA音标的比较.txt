@@ -1,0 +1,48 @@
+以下是KK音标、DJ音标及IPA音标的比较。											
+元音（母音）-17														
+	单元音							
+序号	KK	DJ	IPA	单字示例	
+1	[i]	[iː]	[iː]	seat	
+2=	[ɪ]	[ɪ]	[ɪ]	sit	
+3	[e]	[eɪ]	[eɪ]	pain	
+4	[ɛ]	[e]	[e]	head				
+5=	[æ]	[æ]	[æ]	fat				
+6	[ɑ]	[ɑː]	[ɑ]	hot				
+7	[o]	[əʊ]	[əʊ]	nose				
+8	[ɔ]	[ɔː]	[ɔː]	four				
+	[ɔ]	[ɔ]	[ɒ]	dog				
+9	[u]	[uː]	[uː]	too				
+	[ᴜ]	[ʊ]	[ʊ]	put				
+10=	[Ʌ]	[ʌ]	[ʌ]	sun				
+11=	[ə]	[ə]	[ə]	again				
+12	[ɪr]	[ɪə]	[ɪə]	rear				
+13	[ɚ]	[ə]	[ə˞]	brother				
+14	[ɝ]	[ɜ]	[ɜ˞]	bird
+--------
+双元音
+        KK	DJ	IPA	单字示例
+15=     [ɑɪ]	[aɪ]	[aɪ]	pie
+16      [aᴜ]	[aʊ]	[aʊ]	house
+17=	[ɔɪ]	[ɔɪ]	[ɔɪ]	coin			
+								
+	（数字=）代表KK,DJ,IPA 音标全同。反之不同	
+------------------------------------------------	
+辅音（子音）-24								
+[编辑]								
+清音				浊音				
+KK	DJ	IPA	单字示例	KK	DJ	IPA	单字示例	序号
+[p]	[p]	[p]	pet	[b]	[b]	[b]	book	1
+[t]	[t]	[t]	ten	[d]	[d]	[d]	desk	2
+[k]	[k]	[k]	key	[g]	[g]	[ɡ]	get	3
+[f]	[f]	[f]	fat	[v]	[v]	[v]	vest	4
+[s]	[s]	[s]	sing	[z]	[z]	[z]	zoo	5
+[θ]	[θ]	[θ]	thank	[ð]	[ð]	[ð]	this	6
+[ʃ]	[ʃ]	[ʃ]	short	[ʒ]	[ʒ]	[ʒ]	measure	7
+[tʃ]	[tʃ]	[tʃ]	chair	[dʒ]	[dʒ]	[dʒ]	john	8
+[h]	[h]	[h]	ha	[m]	[m]	[m]	mom	9
+				[n]	[n]	[n]	nose	10
+				[ŋ]	[ŋ]	[ŋ]	sing	11
+				[l]	[l]	[l]	long	12
+				[r]	[r]	[r]	red	13
+				[j]	[j]	[j]	yes	14
+				[w]	[w]	[w]	we	15
