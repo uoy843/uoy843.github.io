@@ -1,0 +1,94 @@
+Cursor 说明文档
+ursor 语言选择？
+Cursor 的语言支持主要分为两个层面：界面语言和对话语言。
+它本质上是基于 VS Code（微软的开源编辑器）开发的。
+1. 软件界面：可以改成中文
+	Cursor 的主界面（菜单、侧边栏）默认是英文，但你可以通过安装插件轻松将其变为中文：
+	快捷键： 按下 Ctrl + Shift + X 打开插件市场。
+	搜索： 输入 Chinese。
+	安装： 找到 "Chinese (Simplified) (简体中文)" 插件点击 Install。
+	重启： 插件安装后会提示重启，重启后界面（大部分菜单）就会变成中文。
+	注意： Cursor 特有的 AI 设置面板（Cursor Settings）目前仍以英文为主，暂不支持翻译，但这不影响日常使用。
+2. AI 对话：完全支持中文
+    这是对小白最友好的地方。你完全不需要用英文和它交流：
+    直接提要求： 你在右侧对话框（Ctrl + L）直接输入“帮我写个网页”或“这段代码是什么意思”，它会用非常流畅的中文回答你，并生成代码。
+    设定偏好： 你可以进入 Settings (右上方齿轮) -> General -> Rules for AI，在里面写上一句：“请始终用中文回答我的问题”。这样它之后的所有解释都会是中文。
+3.  编程语言支持
+    Cursor 支持几乎所有主流编程语言（Python, JavaScript, HTML/CSS, C++, Java 等）。
+4.  安全性再次提醒
+    在安装好 Cursor 后，建议立即做这件事：
+    按 Ctrl + Shift + J 打开 Cursor 设置。
+    找到 General 选项卡。
+    向下滑动找到 Privacy Mode (隐私模式)。
+    确保它处于 On 状态。
+    代码数据只会留在你本地。
+    总结：Cursor 的“大脑”懂中文，界面也可以通过插件变中文。
+Cursor AI 使用教程
+这个视频详细介绍了如何在 Cursor 中设置编程语言环境，非常适合刚接触这款编辑器的用户快速上手。
+HOW TO ADD A PROGRAMMING LANGUAGE IN CURSOR AI CODE EDITOR - YouTube
+1ClickTutorialen · 238 次观看
+你说
+你可以进入 Settings (右上方齿轮) -> General -> Rules for AI,,Rules for AI找不到？
+Gemini 说
+别急，Cursor 在 2025 年底到 2026 年初的几个版本中对设置界面进行了微调。如果你在 General 下没看到，通常是因为它被移动到了一个更独立、更显眼的入口。
+按照以下最新路径操作即可：
+1. 查找路径（2026 最新版）
+第一步： 点击 Cursor 右上角的 齿轮图标 (Settings)。
+第二步： 在弹出的侧边栏或窗口中，直接看左侧主菜单。现在通常有一个独立的分类叫做 "Rules" 或 "Rules, Commands"。
+第三步： 如果依然没有，请查看 "General" 选项卡，然后向下滚动到 "AI" 或 "Global Instructions" 这一节。
+2. 还有个“快捷键”大招：
+如果还是找不到，可以直接按：
+Ctrl + Shift + J (这是打开 Cursor 全局 AI 设置的快捷键)
+在打开的窗口中，你会看到一个输入框，标题可能是 "Rules for AI" 或者 "Global Rules"。
+3. 你该写什么？（小白必装“翻译官”）
+找到那个大的文本输入框后，直接把下面这段话复制进去：
+Please always respond to me in Simplified Chinese. If I provide technical terms in English, explain them in Chinese but keep the original English term in brackets.
+（请始终用简体中文回答我。如果我提供英文技术术语，请用中文解释，但在括号内保留原始英文术语。）
+4. 为什么这么做？
+强制中文： 这样它以后就不会偶尔蹦出英文来“难为”你了。
+温馨提示：
+如果你在设置里看到 "Project Rules"，那是针对某个特定文件夹的；我们要找的是 "User Rules" 或 "Global Rules"，这样不管你写什么代码，它都会听你的话。
+找到了吗？如果那个框里已经有字了，直接在后面另起一行贴进去就行。
+你说
+?Rules for AI?
+Cursor 把这个功能整合到了左侧菜单里，名字稍微变了一点。
+在你的截图左侧，找到 Plugins 分类下的这一项：
+第一步：点击这里
+找到图标像书本一样的 Rules, Skills, Subagents（就在 Plugins 下面，Tools & MCPs 上面）。
+第二步：具体操作
+点击 Rules, Skills, Subagents 后，右侧主界面会切换。
+在右侧你会看到一个大的输入框，标题通常是 "Rules"。
+直接在框里粘贴我之前给你的那段“咒语”：
+Please always respond to me in Simplified Chinese. If I provide technical terms in English, explain them in Chinese but keep the original English term in brackets.
+为什么改名了？
+现在的 Cursor 变得更强大了，它把 AI 的“行为准则（Rules）”和“技能（Skills）”放在了一起。
+Rules：决定了 AI 怎么跟你说话（比如必须说中文）。
+Skills/Subagents：是让 AI 学会特定的本领（比如专门帮你修车电路或者优化 Windows 10）。
+补充一个小细节：
+（右侧有一个 Log in 按钮）。
+建议： 最好点一下登录你的账号。虽然不登录也能用一点点，但登录后你能获得更稳定的 AI 模型支持，而且这些 Rules 才能跟着你的账号走，换台电脑也能生效。
+设置好之后，你可以试着在右侧对话框（那个 "Plan, Build..." 的框）里发个 "Hi"，看看它是不是已经变回亲切的中文啦？
+你说
+它对有代码的是不是比Gemini更直观一点？
+是的，你的感觉非常精准。Cursor 在处理代码时的“直观度”确实比单纯的 Gemini 对话窗口要高出好几个量级。
+如果说 Gemini 像是一个**“懂代码的聊天网友”，那么 Cursor 就是一个“坐在你旁边帮你改代码的资深同事”**。
+以下是 Cursor 比 Gemini 更直观的几个核心原因：
+1. “所见即所得”的修改（Diff 视图）
+这是 Cursor 最杀手级的直观功能：
+Gemini：它会丢给你一大段完整的代码，你需要自己手动复制，然后去文件里找对应的位置替换，非常容易出错。
+Cursor：它会直接在你的代码文件里进行对比修改（Diff）。它用绿色显示新加的代码，红色显示删掉的代码。你只需要看一眼，觉得没问题点一下 Accept (接受)，代码就自动改好了。你完全不需要“复制+粘贴”。
+2. 强大的“组合拳”：Composer (Ctrl + I)
+你在截图里看到的那个右侧对话框只是基础。Cursor 还有一个更高级的模式叫 Composer：
+它可以同时修改多个文件。比如你对它说“把网页背景改成蓝色”，它能同时帮你修改 index.html 的结构和 style.css 的样式。
+它会像进度条一样展示它正在修改哪些文件，修改了第几行，这种掌控感是网页端 AI 给不了的。
+3. 全局搜索与文件索引 (@ 符号)
+在 Cursor 里，你可以直接用 @ 符号来指引 AI：
+输入 @Files，AI 就能立刻“看见”你项目里的所有文件。
+输入 @Docs，它可以直接读取最新的技术文档（比如你想查三星手机的 API 或者是 2026 年最新的网页标准）。
+在 Gemini 里，你得把代码一段段复制给它，它才知道你在说什么。
+4. 预测你的下一步
+Cursor 有一个功能叫 Cursor Prediction。当你改完这一行，它会变灰显示它预测你下一行想写什么。你只需要按一下 Tab 键，代码就自动补全了。这种“心有灵犀”的感觉非常适合小白，因为它能顺着你的逻辑往下带。
+直观度对比总结
+建议操作：
+既然你已经装好了 Cursor，可以试着按 Ctrl + K。它会在你代码行的位置弹出一个小框，你直接输入“把这段文字加粗并居中”，看它如何直接在代码里“动手术”，你就知道为什么它更直观了。
+这个视频详细演示了 Cursor 如何通过直观的界面和快捷键帮你快速生成和修改代码。
