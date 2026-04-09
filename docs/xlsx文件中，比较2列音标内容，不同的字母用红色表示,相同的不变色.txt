@@ -1,0 +1,158 @@
+xlsx文件中，比较2列音标内容，不同的字母用红色表示,相同的不变色
+
+在 Excel 中，如果你想对两列文本进行字符级别的差异对比（即只让不同的字母变红），Excel 自带的“条件格式”通常只能做到整格变色。
+要实现单个字符变色，最有效的方法是使用 VBA 脚本。以下是具体操作步骤和代码：
+第一步：打开 VBA 编辑器
+打开你的 Excel 文件。
+按下 Alt + F11 进入 VBA 编辑界面。
+	按下 Alt + F11 进入 VBA 编辑界面 无效？
+	如果按下 Alt + F11 没有反应，通常是因为键盘冲突、功能键锁定或者 Excel 设置问题。你可以尝试以下几种解决方法：
+	1. 检查 Fn 键锁定
+	很多现代笔记本电脑（如联想、戴尔、惠普）的 F1 - F12 默认是多媒体键（调节音量、亮度等）。
+	尝试组合键： 同时按下 Fn + Alt + F11。
+	检查 Fn Lock： 观察键盘上是否有 Fn Esc 或类似带有锁头的图标，按下它可以切换 F11 的原始功能。
+	2. 通过菜单手动进入
+	如果快捷键彻底失效，可以从 Excel 界面手动打开：
+	开启“开发工具”选项卡：
+	在 Excel 顶部的功能区（Ribbon）任意位置点击右键。
+	选择 “自定义功能区” (Customize the Ribbon)。
+	在右侧的列表框中，勾选 “开发工具” (Developer)，点击确定。
+在上方菜单栏选择 “插入” (Insert) -> “模块” (Module)。
+第二步：复制并粘贴代码
+将以下代码复制到空白的模块窗口中：
+VBA
+---------------
+Sub FinalPhoneticHighlight()
+    Dim ws As Worksheet
+    Set ws = ActiveSheet
+    
+    Dim lastRow As Long
+    ' 自动寻找C列最后一行
+    lastRow = ws.Cells(ws.Rows.Count, "C").End(xlUp).Row
+    
+    If lastRow < 2 Then
+        MsgBox "未发现数据，请确保数据在当前活动表的C列和D列。", vbExclamation
+        Exit Sub
+    End If
+    
+    ' 优化性能
+    Application.ScreenUpdating = False
+    Application.Calculation = xlCalculationManual
+    
+    Dim i As Long
+    On Error Resume Next
+    For i = 2 To lastRow
+        Call CompareAndMark(ws.Cells(i, "C"), ws.Cells(i, "D"))
+    Next i
+    On Error GoTo 0
+    
+    Application.Calculation = xlCalculationAutomatic
+    Application.ScreenUpdating = True
+    
+    MsgBox "比对完成！差异音标已标红。", vbInformation
+End Sub
+
+Private Sub CompareAndMark(cellA As Range, cellB As Range)
+    If IsError(cellA.Value) Or IsError(cellB.Value) Then Exit Sub
+    
+    Dim strA As String, strB As String
+    strA = CStr(cellA.Value & "")
+    strB = CStr(cellB.Value & "")
+    
+    If Len(Trim(strA)) = 0 Or Len(Trim(strB)) = 0 Then Exit Sub
+    
+    cellA.Font.ColorIndex = xlAutomatic
+    cellB.Font.ColorIndex = xlAutomatic
+    
+    Dim regEx As Object
+    Set regEx = CreateObject("VBScript.RegExp")
+    regEx.Global = True
+    
+    ' --- 关键修复：使用 ChrW 拼接特殊音标字符防止 VBE 乱码 ---
+    ' 包含了主要的双元音、破擦音、长音符号等
+    Dim p As String
+    p = "t" & ChrW(643) & "|d" & ChrW(658) & "|tr|dr|ts|dz|" ' t?, d?
+    p = p & "a" & ChrW(618) & "|a" & ChrW(650) & "|" & ChrW(596) & ChrW(618) & "|" ' a?, a?, ??
+    p = p & "e" & ChrW(618) & "|" & ChrW(601) & ChrW(650) & "|o" & ChrW(650) & "|" ' e?, ??, o?
+    p = p & ChrW(618) & ChrW(601) & "|e" & ChrW(601) & "|" & ChrW(650) & ChrW(601) & "|" ' ??, e?, ??
+    p = p & "i" & ChrW(720) & "|a" & ChrW(720) & "|" & ChrW(596) & ChrW(720) & "|" ' i?, a?, ??
+    p = p & "u" & ChrW(720) & "|" & ChrW(515) & ChrW(720) & "|" ' u?, ??
+    p = p & ChrW(230) & "|" & ChrW(652) & "|" & ChrW(594) & "|" & ChrW(601) & "|" ' ?, ?, ?, ?
+    p = p & ChrW(618) & "|" & ChrW(603) & "|" & ChrW(650) & "|" & ChrW(712) & "|" & ChrW(716) & "|." ' ?, ?, ?, ?, ?, .
+    
+    regEx.Pattern = p
+    
+    Dim tokensA As Object, tokensB As Object
+    Set tokensA = regEx.Execute(strA)
+    Set tokensB = regEx.Execute(strB)
+    
+    Dim m As Integer, n As Integer
+    m = tokensA.Count
+    n = tokensB.Count
+    If m = 0 Or n = 0 Then Exit Sub
+    
+    ' LCS算法对齐
+    Dim L() As Integer: ReDim L(m, n)
+    Dim i As Integer, j As Integer
+    For i = 1 To m
+        For j = 1 To n
+            If tokensA.Item(i - 1).Value = tokensB.Item(j - 1).Value Then
+                L(i, j) = L(i - 1, j - 1) + 1
+            Else
+                If L(i - 1, j) >= L(i, j - 1) Then L(i, j) = L(i - 1, j) Else L(i, j) = L(i, j - 1)
+            End If
+        Next j
+    Next i
+    
+    Dim matchA() As Boolean, matchB() As Boolean
+    ReDim matchA(m): ReDim matchB(n)
+    i = m: j = n
+    Do While i > 0 And j > 0
+        If tokensA.Item(i - 1).Value = tokensB.Item(j - 1).Value Then
+            matchA(i - 1) = True: matchB(j - 1) = True
+            i = i - 1: j = j - 1
+        ElseIf L(i - 1, j) >= L(i, j - 1) Then
+            i = i - 1
+        Else
+            j = j - 1
+        End If
+    Loop
+    
+    ' 单元格内局部标红
+    For i = 0 To m - 1
+        If Not matchA(i) Then
+            cellA.Characters(tokensA.Item(i).FirstIndex + 1, tokensA.Item(i).Length).Font.Color = RGB(255, 0, 0)
+        End If
+    Next i
+    For j = 0 To n - 1
+        If Not matchB(j) Then
+            cellB.Characters(tokensB.Item(j).FirstIndex + 1, tokensB.Item(j).Length).Font.Color = RGB(255, 0, 0)
+        End If
+    Next j
+End Sub
+-------------------
+第三步：运行脚本
+在代码界面按下 F5 键，或者点击工具栏的“运行”按钮（绿色三角形）。
+返回 Excel 工作表，你会发现 A 列和 B 列中不一致的字符已经变成了红色。
+注意事项：
+修改范围：代码中的 Range("A1:A100") 是指对比 A1 到 A100 单元格。如果你的数据更多，请将其修改为实际范围（例如 A1:A5000）。
+备份数据：运行宏（VBA）是无法撤销（Undo）的，建议在操作前备份一份文件。
+文件保存：由于包含了 VBA 代码，保存文件时请选择 “Excel 启用宏的工作簿 (.xlsm)” 格式。
+为什么不推荐公式？
+普通的公式（如 EXACT 或 IF）只能告诉你整串内容是否相同，无法改变单元格内部分字符的颜色。只有 VBA 或手动修改才能实现这种精细的格式化。
+你说
+
+点击进入：
+现在顶部菜单会出现“开发工具”选项卡。
+点击最左侧的 “Visual Basic” 按钮即可进入。
+3. 检查后台软件冲突
+某些软件（特别是翻译词典、屏幕录制软件、或部分国产输入法）会占用 Alt + F11 这个全局快捷键。
+尝试暂时退出这类后台软件。
+如果你使用的是 10.0.26100 版本的 Windows 10，可以检查是否有系统级辅助工具抢占了快捷键。
+4. 特殊情况：Excel 禁用了宏
+如果你的 Excel 是由公司管理或者是精简版，VBA 功能可能被禁用或未安装：
+点击 “文件” (File) -> “选项” (Options) -> “信任中心” (Trust Center)。
+点击 “信任中心设置”，在 “宏设置” 中检查是否选择了“禁用所有宏”。
+如果点击“Visual Basic”按钮提示“尚未安装此功能”，则需要重新运行 Office 安装程序并勾选“Office 共享功能”中的 VBA 模块。
+小技巧：
+进入 VBA 界面后，如果看不到写代码的地方，请记得点击菜单栏的 “视图” (View) -> “项目资源管理器” (Project Explorer)，然后在左侧文件夹上右键插入模块。
