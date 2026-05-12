@@ -1,0 +1,59 @@
+Chrome 4GB AI 禁止方法
+
+删除步骤：
+1. 手动删除已下载的模型文件
+C:\Users\你的用户名\AppData\Local\Google\Chrome\User Data\OptGuideOnDeviceModel\
+ 进入后找到下方图示里的文件：weights.bin 这就是 Chrome/Edge 浏览器偷偷下载的模型，总共4G左右大小
+ 
+2. 在 Chrome 中禁用本地 AI 功能
+即使删除了文件，如果不禁用功能，Chrome 仍会自动重新下载。
+在 Chrome 地址栏中输入 chrome://flags 并回车。
+在搜索框中输入 Enables optimization guide on device 。
+将对应的设置选项从 “Default” 或 “Enabled” 更改为 “Disabled”。
+点击右下角的 “Relaunch” 按钮重启浏览器。
+注意：如果chrome://flags 找不到相关选项，就选择下方更彻底的禁止方法！
+Windows 用户：彻底禁止下载的方法（推荐）
+Windows 用户可以直接通过注册表禁用。
+管理员身份打开 CMD：
+禁用 Chrome 设备端 AI
+reg add "HKLM\SOFTWARE\Policies\Google\Chrome" /v "GenAILocalFoundationalModelSettings" /t REG_DWORD /d 1 /f
+禁用 Edge 设备端 AI
+reg add "HKLM\SOFTWARE\Policies\Microsoft\Edge" /v "GenAILocalFoundationalModelSettings" /t REG_DWORD /d 1 /f
+以上命令中的注册表键值 1 代表禁用设备端 AI 功能。如果后续你想重新启用，只需要将命令最后的 1 改为 0 后再次执行即可。
+另外，通过注册表或组策略进行修改后，浏览器“关于”页面可能会出现“由你的组织管理”之类的提示。这个只是系统提示，用于说明浏览器策略被修改，并不会影响浏览器的正常使用，也不会对个人账号造成影响。
+如何查看 Chrome 是否偷偷下载 AI 模型？
+
+Mac 用户可以打开终端执行：
+du -sh ~/Library/Application\ Support/Google/Chrome/optimization_guide_model_store
+如果这里显示：
+3GB
+4GB
+甚至更大
+那说明 Chrome 已经下载了本地 AI 模型。
+
+Mac 如何删除 Chrome 本地 AI 模型？
+首先：
+彻底退出 Chrome。
+pkill Chrome
+然后删除模型：
+rm -rf ~/Library/Application\ Support/Google/Chrome/optimization_guide_model_store
+建议连下面这个一起删除：
+rm -rf ~/Library/Application\ Support/Google/Chrome/OnDeviceHeadSuggestModel
+如何防止 Chrome 再次自动下载？
+打开 Chrome 地址栏：
+chrome://flags
+ 
+搜索：
+Gemini Nano
+On-device AI
+Enables optimization guide on device
+全部改成：Disabled
+尤其是：#Enables optimization guide on device
+这个最好直接关闭。
+否则浏览器后面可能会重新下载。
+macOS:
+chmod 444 weights.bin && chflags uchg weights.bin
+ 
+Linux:
+chmod 444 weights.bin && sudo chattr +i weights.bin
+ 
