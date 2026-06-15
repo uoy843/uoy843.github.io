@@ -1,0 +1,39 @@
+GitHub 个人访问令牌（Classic Token）
+ 1.    AnythingLLM   https://www.youtube.com/watch?v=rAaxJ9H4b2E&t=28s
+ 2.    -----------------------
+ 3.    第一步：获取 GitHub 个人访问令牌（Classic Token）
+ 4.    为了让 AnythingLLM 能够读取 GitHub 的仓库数据（特别是私有仓库），你需要先去 GitHub 生成一个令牌（Token）。
+ 5.    登录你的 GitHub 账号。
+ 6.    点击右上角头像 -> 选择 Settings（设置）。
+ 7.    滚动到左侧菜单最下方，点击 Developer Settings（开发者设置）。
+ 8.    选择 Personal access tokens -> 点击 Tokens (classic)。
+ 9.    点击 Generate new token (classic)。
+10.    设置权限：
+11.    给 Token 起个名字（例如 anything-llm）。
+12.    勾选 repo 权限（如果是公共仓库，只勾选 public_repo 即可；如果是私有仓库，需要勾选整个 repo 大项）。
+13.    点击最下方的 Generate token，立刻复制保存生成的这串代码（离开页面后就再也看不到了）。
+14.    第二步：在 AnythingLLM 中配置 GitHub 接入
+15.    打开 AnythingLLM，进入任意一个 工作区（Workspace）。
+16.    点击输入框上方的 Upload a document（上传文档） 图标（通常是一个小图钉或上传箭头的符号），打开文档管理弹窗。
+17.    在弹窗的左侧数据源列表里，找到并点击 GitHub 图标。
+18.    填写配置信息：
+19.    GitHub Access Token：粘贴你刚刚在第一步里复制的 GitHub Token。
+20.    Repository URL：输入你想导入的 GitHub 仓库完整网址（例如 https://github.com/username/repo-name）。
+21.    Branch：输入你想读取的分支名称，默认一般是 main 或 master。
+22.    点击 Fetch Repository（获取仓库）。
+23.    第三步：挑选文件并同步到工作区
+24.    AnythingLLM 并不会不分青红皂白地把所有垃圾文件都吞下去。获取成功后，你会看到该仓库的文件目录树。
+25.    筛选文件：你可以勾选整个项目，也可以展开文件夹，只勾选核心代码目录（如 src/、lib/）以及 README.md。
+26.    💡 避坑建议：强烈建议取消勾选类似 
+        package-lock.json、pnpm-lock.yaml、编译产物（dist/、build/）以及依赖包目录（node_modules/）。这些文件体积巨大且全是流水账，会让你的本地显存和向量数据库瞬间爆炸，且对 AI 毫无意义。
+27.    勾选完成后，点击右下角的 Save / Move into Workspace。
+28.    此时文件会进入右侧的工作区暂存区，点击 Save and Embed（保存并向量化）。
+29.    进度条走完后，GitHub 的代码就已经变成“向量知识”注入到这个工作区了。
+30.    第四步：调教大模型（结合 LM Studio 使用技巧）
+31.    现在你可以直接在聊天框里问它关于这个仓库的任何问题了。但如果你使用的是本地的 LM Studio + GTX 1060 (6GB) 组合，由于硬件限制，请务必注意以下几点：
+32.    问题要具体，避免“既要又要”：
+33.    ❌ 错误问法：“帮我分析一下这个项目的整体架构和所有代码逻辑。”（这会导致 AnythingLLM 从数据库里捞出海量代码拼进提示词，瞬间撑爆你的 6GB 显存，导致 LM Studio 报错闪退）。
+34.    正确问法：“在 src/utils/ 目录下，哪个文件负责处理用户登录的 Token？它是怎么实现的？”（定向检索，显存压力小）。
+35.    善用“Query（检索）”模式：
+36.    在输入框上方将模式切换为 Query。这样 AnythingLLM 会极其严格地只在代码库里找答案。如果 LM Studio 试图胡思乱想，Query 模式会强行约束它，从而节省计算资源。
+37.    通过这种方式，你就拥有了一个完全本地运行、绝对保护代码隐私的“AI 源码架构师”了。
