@@ -1,0 +1,62 @@
+anythingLLM 向量数据库如何保存
+1 . 在 AnythingLLM 中，向量文件（Vector Files）的保存方式和存储路径，主要取决于你使用的是 **“内置默认向量数据库 (LanceDB)”** 还是 **“外置向量数据库 (如 Chroma, Pinecone, Weaviate 等)”**。
+2 . 
+3 . 以下是具体的保存机制和文件查找方法：
+4 . 
+5 . ---
+6 . 
+7 . ## 1. 默认情况：使用内置的 LanceDB
+8 . 
+9 . 如果你在安装 AnythingLLM 后没有特意去配置第三方向量数据库，系统会默认使用 **LanceDB**。这是一种嵌入式的、无服务器的本地向量数据库。
+10. 
+11. * **保存形式：** 向量数据直接以**本地文件**的形式保存在你的电脑硬盘上。
+12. * **保存路径：**
+13. 根据你安装 AnythingLLM 的版本（桌面版客户端 或 Docker版），其默认的本地存储路径如下：
+14. * **Windows 桌面版：**
+15. `C:\Users\<你的用户名>\AppData\Roaming\anythingllm-desktop\storage\lancedb`
+16. * **Mac 桌面版：**
+17. `/Users/<你的用户名>/Library/Application Support/anythingllm-desktop/storage/lancedb`
+18. * **Linux 桌面版：**
+19. `~/.config/anythingllm-desktop/storage/lancedb`
+20. * **Docker 版本：**
+21. 如果你在启动 Docker 时挂载了卷（Volume），例如 `-v /var/lib/anythingllm:/app/server/storage`，那么向量文件就会保存在宿主机的 `/var/lib/anythingllm/lancedb` 目录下。
+22. 
+23. 
+24. 
+25. > 💡 **文件结构：** 在 `lancedb` 文件夹下，你会看到许多以工作区（Workspace）命名的子文件夹，里面包含了 `.lance` 后缀的数据文件。这就是 AnythingLLM 将你的文档切片、嵌入（Embedding）后实际存储的地方。
+26. 
+27. ---
+28. 
+29. ## 2. 进阶情况：使用外置向量数据库
+30. 
+31. 如果你在 AnythingLLM 的 **Settings -> Vector Database** 中切换成了其他数据库，保存机制就会改变：
+32. 
+33. * **本地外置（如本地部署的 Chroma / Qdrant / Milvus）：**
+34. 向量文件不会保存在 AnythingLLM 的目录中，而是保存在你运行这些第三方数据库时指定的存储路径中。
+35. * **云端外置（如 Pinecone / Weaviate Cloud）：**
+36. 向量数据完全不会保存在本地，而是通过 API 自动上传并保存在对应的云端服务器上。
+37. 
+38. ---
+39. 
+40. ## 3. 如何备份或迁移这些向量文件？
+41. 
+42. 如果你想备份当前的知识库，或者把向量文件迁移到另一台电脑，可以采用以下两种方法：
+43. 
+44. ### 方法 A：直接备份存储文件夹（最彻底）
+45. 
+46. 1. 完全彻底退出 AnythingLLM 程序。
+47. 2. 找到上面提到的 `storage` 文件夹（包含 `lancedb` 子目录）。
+48. 3. 将整个 `storage` 文件夹复制并保存到备份盘中。
+49. 4. **恢复/迁移时：** 在新电脑上安装好相同版本的 AnythingLLM，然后将备份的 `storage` 文件夹覆盖过去即可。
+50. 
+51. ### 方法 B：使用 AnythingLLM 内置的备份功能
+52. 
+53. 1. 打开 AnythingLLM，点击左下角的 **Settings（设置）**。
+54. 2. 找到 **Export/Import Data**（或工具箱相关的选项）。
+55. 3. 导出整个系统的备份包，其中会包含你的工作区配置、文档记录以及部分轻量数据。
+56. 
+57. ### ⚠️ 注意事项
+58. 
+59. * **不要在程序运行时复制文件：** 在 AnythingLLM 运行或正在读取文档时，直接复制 `lancedb` 文件夹可能会导致备份的文件损坏。
+60. * **Embedding 模型一致性：** 如果你迁移了向量文件，在新设备上必须使用**完全相同的 Embedding 模型**（例如同款 Ollama 运行的 `bge-large` 或 OpenAI 的 `text-embedding-3-small`）。如果模型不一致，旧的向量文件将无法被正确检索。
+61. --------------
