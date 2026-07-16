@@ -1,0 +1,177 @@
+word 使用技巧
+word 移除空行
+  移除空行非常简单！你可以选择以下几种最快的方法：
+   1. 让我帮你处理
+  你可以直接把文本复制并粘贴到这里，我会立刻帮你把所有的空行全部删掉，并把干净的文本返回给你。
+  ---
+   2. 使用常用文本编辑器（极速方法）
+   🔹 在 VS Code / Sublime Text 中：
+  1. 按下 `Ctrl + H`（Mac 上为 `Cmd + Option + F`）打开查找和替换。
+  2. 点击开启 正则表达式 (Regex) 模式（图标通常是 `.*`）。
+  3. 在“查找 (Find)”框输入：`^\s*\n`
+  4. 在“替换 (Replace)”框留空。
+  5. 点击“全部替换 (Replace All)”。
+   🔹 在 Word 中：
+  1. 按下 `Ctrl + H` 打开查找和替换。
+  2. 在“查找内容”输入：`^p^p`（代表连续两个段落标记）
+  3. 在“替换为”输入：`^p`（代表一个段落标记）
+  4. 点击“全部替换”，可能需要连续点击几次，直到提示替换了 0 处。
+  ---
+   3. 使用 Python 代码处理
+  如果你在处理大文件，可以用这段简单的代码：
+  ```python
+   替换为你的文件路径
+  with open("input.txt", "r", encoding="utf-8") as f:
+       过滤掉只包含空白字符的行
+      lines = [line for line in f if line.strip()]
+  with open("output.txt", "w", encoding="utf-8") as f:
+      f.writelines(lines)
+  ```
+--WORD 文件变为黑底白字
+  让 Word 文件变成黑底白字，通常是为了在夜间或长时间阅读时保护眼睛（深色模式）。
+  根据你的具体需求，有三种不同的方法可以实现：
+   方法一：只是为了自己阅读舒服（最推荐、不影响打印）
+  这种方法会让你的软件界面和页面变黑，但文件的实际内容并没有改变。如果你把文件发给别人，或者拿去打印，它仍然是白底黑字的。
+  1. 打开 Word。
+  2. 点击左上角的 “文件” (File)。
+  3. 点击左下角的 “账户” (Account)。
+  4. 在右侧找到 “Office 主题” (Office Theme) 下拉菜单。
+  5. 选择 “黑色” (Black)。
+  > 提示： 选择黑色主题后，你的页面可能还是白的。你需要点击 Word 顶部菜单栏的 “视图” (View) 选项卡，然后点击 “切换模式” (Switch Modes) 按钮（太阳/月亮图标），页面就会变黑了。
+  ---
+   方法二：永久改变文档颜色（不推荐，影响打印）
+  这种方法是真真正正地把页面的背景色涂成黑色，把字体涂成白色。
+  * 警告： 如果你这样设置后去打印，会消耗大量的黑色墨水/碳粉，而且纸张会变湿。
+  如果你确定要这么做：
+  1. 在顶部菜单栏点击 “设计” (Design) 选项卡。
+  2. 在右侧找到并点击 “页面颜色” (Page Color)。
+  3. 在弹出的色板中选择 黑色。
+  4. Word 通常会自动把黑色字体识别并全选变为白色。如果没有，你需要全选文本 (`Ctrl + A`)，然后在“开始”选项卡中把字体颜色改为白色。
+  ---
+   方法三：阅读模式（快速、临时）
+  如果你只是想临时快速阅读，不想更改任何设置。
+  1. 在顶部菜单栏点击 “视图” (View) 选项卡。
+  2. 点击最左边的 “阅读视图” (Read Mode)。
+  3. 进入阅读视图后，点击顶部菜单的 “查看” (View)。
+  4. 选择 “页面颜色” (Page Color) -> “反转” (Inverse)。
+  这样就变成了黑底白字的纯净阅读环境。按 `Esc` 键即可退出。
+-------------
+ 回车符不显示？
+  在 Word 中，回车符（段落标记 $\color{EC5C00}{\boldsymbol{\hookleftarrow}}$ 或 $\color{EC5C00}{\boldsymbol{\shortdownarrow}}$）不显示，通常是因为软件设置中隐藏了格式标记。
+  你可以通过以下两种最快的方法让它重新显示出来：
+   方法一：使用快捷键（最快）
+  在键盘上同时按下：
+  $$\mathbf{Ctrl} + \mathbf{Shift} + \mathbf{8}$$
+  （注意：是字母键盘上方的数字键 `8`，不是右侧小键盘的 `8`）。
+  按下后，所有的回车符、空格和制表符都会立刻显示出来。
+  ---
+   方法二：点击“显示/隐藏”按钮
+  1. 确保你当前处于 Word 顶部的 “开始” (Home) 选项卡。
+  2. 在“段落”功能区中，找到一个长得像 双竖线和反向 P 的图标：
+  $$\boldsymbol{\P}$$
+  （显示/隐藏编辑标记）。
+  3. 点击它，回车符就会重新显示。
+  ---
+   方法三：永久锁定显示（防止误触隐藏）
+  如果你希望回车符一直显示，不受上面快捷键和按钮的影响：
+    1. 点击 Word 左上角的 “文件” $\rightarrow$ “选项”。
+    2. 在弹出的窗口左侧选择 “显示”。
+    3. 在右侧的“始终在屏幕上显示这些格式标记”下方，勾选 “段落标记”。
+    4. 点击 “确定” 保存设置。
+=================
+word 中多行显示行号
+  在 Word 中为多行文字显示和设置行号非常简单，你可以让它每一页重新计算行号，或者整篇文章连续计算。
+  以下是具体的设置方法：
+   第一步：开启行号显示
+    1. 点击 Word 顶部菜单栏的 “布局”（Layout）选项卡（较旧版本的 Word 可能叫“页面布局”）。
+    2. 在“页面设置”功能区中，找到并点击 “行号”（Line Numbers）按钮。
+    3. 在弹出的下拉菜单中，根据你的需求选择一种显示方式：
+    * 连续（Continuous）：整篇文档的所有行从 1 开始一直往下排（最常用）。
+    * 每页重新编号（Restart Each Page）：每到新的一页，行号都从 1 重新开始计算。
+    * 每节重新编号（Restart Each Section）：配合分节符使用，每个新章节重新从 1 开始计算。
+   第二步：只给“特定多行”显示行号（可选）
+  如果你只想让文档中的某一段或某几行显示行号，其他地方不显示，可以这样操作：
+    1. 先按照上面的方法开启 “连续” 行号。
+    2. 选中 你不想显示行号的那些文本。
+    3. 再次点击 “行号” 按钮，选择 “禁止用于当前段落”（Suppress for Current Paragraph）。
+    4. 这样，只有你需要的那几行才会保留行号。
+  ---
+   💡 常见问题与技巧
+  * 行号离文字太近或太远？
+  点击“行号”菜单最下方的 “行号选项”，在弹出的窗口中点击“行号”按钮，可以调节“距正文”的距离。
+  * 为什么开启了却看不到行号？
+  行号只有在 “页面视图”（Print Layout）下才会显示。如果找不到，请点击顶部菜单的 “视图” $\rightarrow$ 选择 “页面视图”。
+  * 想关闭行号？
+  直接再次点击 “布局” $\rightarrow$ “行号” $\rightarrow$ 选择 “无” 即可清除。
+------------------------
+多行中移除重复的行
+  在 Word 中，由于它本身是文字排版软件，并没有像 Excel 那样直观的“一键删除重复行”按钮。不过，你可以通过以下几种最快、最有效的方法来实现多行去重：
+   方法一：复制到 Excel 处理（最推荐，最简单）
+  如果你的 Word 文档中每行是一个独立的段落，用 Excel 辅助是最快且不会出错的方法：
+  1. 在 Word 中选中并复制 (`Ctrl + C`) 你需要去重的多行文字。
+  2. 打开 Excel，新建一个空白表格，把内容粘贴 (`Ctrl + V`) 进去（它会自动变成一列多行）。
+  3. 选中这一列，点击 Excel 顶部菜单栏的 “数据” (Data) 选项卡。
+  4. 点击 “删除重复值” (Remove Duplicates) 按钮。
+  5. 在弹出的窗口中点击“确定”，重复的行就会被瞬间删掉。
+  6. 复制 Excel 中留下的干净数据，重新粘贴回 Word 即可。
+  ---
+   方法二：使用 Word 自带的“排序”功能（手动去重）
+  如果不想借助 Excel，且数据量不是特别庞大（比如只有几十行），可以利用排序让重复行挨在一起，方便手动删除：
+  1. 选中需要去重的多行文字。
+  2. 在 “开始” (Home) 选项卡中，找到段落工具栏里的 “排序” 按钮（图标通常是 A-Z 加上一个向下的箭头）。
+  3. 弹出的窗口直接点击 “确定”，文字会按首字母重新排序。
+  4. 排序后，一模一样的行会紧挨在一起，你只需快速扫视并手动删掉相邻的重复行即可。
+  ---
+   方法三：高级玩家——使用 VBA 宏（一键自动去重）
+  如果你经常需要在 Word 中处理成百上千行的去重工作，可以使用以下这段 VBA 脚本。它会直接对你选中的文本进行自动去重：
+  1. 在 Word 中按下 `Alt + F11` 打开 VBA 编辑器。
+  2. 点击菜单栏的 “插入” (Insert) $\rightarrow$ “模块” (Module)。
+  3. 将以下代码复制并粘贴到右侧的代码窗口中：
+```vba
+Sub RemoveDuplicateLines()
+    Dim sText As String
+    Dim arrLines() As String
+    Dim dict As Object
+    Dim i As Long
+    Dim sResult As String
+    
+    ' 检查是否有选中内容
+    If Selection.Type = wdSelectionIP Then
+        MsgBox "请先选中需要去重的多行文本！", vbExclamation
+        Exit Sub
+    End If
+    
+    ' 获取选中的文本
+    sText = Selection.Text
+    ' 将文本按换行符拆分
+    sText = Replace(sText, vbCrLf, vbCr)
+    sText = Replace(sText, vbLf, vbCr)
+    arrLines = Split(sText, vbCr)
+    
+    ' 使用 Dictionary 来去重
+    Set dict = CreateObject("Scripting.Dictionary")
+    
+    For i = LBound(arrLines) To UBound(arrLines)
+        ' 排除空行，并去除行尾空格后去重
+        Dim trimmedLine As String
+        trimmedLine = Trim(arrLines(i))
+        If trimmedLine <> "" Then
+            If Not dict.Exists(trimmedLine) Then
+                dict.Add trimmedLine, True
+                sResult = sResult & arrLines(i) & vbCrLf
+            End If
+        End If
+    Next i
+    
+    ' 用去重后的文本替换选中的文本
+    If Len(sResult) > 0 Then
+        sResult = Left(sResult, Len(sResult) - 2) ' 移除最后一个换行
+        Selection.Text = sResult
+        MsgBox "去重完成！", vbInformation
+    End If
+End Sub
+```
+  4. 关闭 VBA 窗口回到 Word。
+  5. 鼠标选中你需要去重的文本行。
+  6. 按下 `Alt + F8`，选择 `RemoveDuplicateLines` 宏，然后点击 “运行”。重复的行就会瞬间消失
+  ---------
