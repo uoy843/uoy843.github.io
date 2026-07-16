@@ -1,0 +1,127 @@
+https://www.youtube.com/watch?v=vp_dwfCiifQ&t=114s&ab_channel=adekeji%E9%98%BF%E5%BE%B7%E7%A7%91%E6%8A%80
+在 Windows PowerShell 命令窗口里所用到的命令如下：
+一、搜索查看当前电脑安装所有内置默认应用程序命令：
+Get-AppxPackage
+二、以txt文件形式，导出所有内置默认应用程序详细信息到电脑硬盘命令： AppxPackage=应用程序包
+Get-AppxPackage >> D:\abcde.txt
+三、以txt文件形式，只导出应用程序名称和应用包全称到电脑硬盘命令:   Select=选择 PackageFullName=包全名
+Get-AppxPackage | Select Name,PackageFullName >> D:\yingyongbao.txt
+四、强制卸载指定某一个应用程序命令：
+Remove-AppxPackage +应用程序包全称
+五、重新恢复安装已卸载掉的某个指定应用程序命令： register=登记  DisableDevelopmentMode=禁用开发模式
+Add-AppxPackage -register "应用程序安装地址\appxmanifest.xml" -DisableDevelopmentMode
+六、删除电脑所有系统内置默认应用程序命令：
+Get-AppxPackage * |  Remove-AppxPackage
+七、恢复所有系统内置默认应用程序命令：
+Get-AppxPackage -AllUsers | Foreach {Add-AppxPackage -DisableDevelopmentMode -Register "$($_.InstallLocation)\AppXManifest.xml"}
+
+ 禁用启动延迟功能：优化 windows11 系统性能方法二里面注册表地址：HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer
+ 创建 Serialize 项，在 Serialize 项下再创建一个名为 StartupDelaylnMsec 的 32位 DWORD 值 数值数据=0
+-------------------------------------------------------------------------------
+#一、搜索查看当前电脑安装所有内置默认应用程序命令：  appxpackage=应用程序包
+	PS C:\WINDOWS\system32> get-appxpackage
+#二、以txt文件形式，导出所有内置默认应用程序详细信息到电脑硬盘命令：AppxPackage=应用程序包
+	PS C:\WINDOWS\system32> get-appxpackage >> C:\内置默认应用.txt 
+#三、以txt文件形式，只导出应用程序名称和应用包全称到电脑硬盘命令:  Select=选择 PackageFullName=包全名
+	PS C:\WINDOWS\system32> get-appxpackage | Select Name,PackageFullName >> C:\应用包yingyongbao.txt 
+#四、强制卸载指定某一个应用程序命令：
+	PS C:\WINDOWS\system32> Remove-AppxPackage+应用程序包全称  #Microsoft.MicrosoftEdge_44.19041.363...  #Microsoft.MicrosoftEdge_92.0.902.67
+#五、重新恢复安装已卸载掉的某个指定应用程序命令：  register=登记  DisableDevelopmentMode=禁用开发模式
+	PS C:\WINDOWS\system32> Add-AppxPackage -register "应用程序安装地址(InstallLocation)\appxmanifest.xml" -DisableDevelopmentMode
+            例：PS C:\WINDOWS\system32> Add-AppxPackage -register "C:\Program Files\WindowsApps\Microsoft.People_10.2202.33.0_x64__8wekyb3d8bbwe\appxmanifest.xml" -DisableDevelopmentMode
+#六、删除电脑所有系统内置默认应用程序命令：
+	PS C:\WINDOWS\system32> get-appxpackage * | Remove-AppxPackage
+#七、恢复所有系统内置默认应用程序命令：
+	PS C:\WINDOWS\system32> get-appxpackage -AllUsers | Foreach {Add-AppxPackage -DisableDevelopmentMode -Register "$($_.InstallLocation)\AppXManifest.xml"}
+----------------------------------------
+ 禁用启动延迟功能：优化 windows11 系统性能方法二里面注册表地址：HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer
+ 创建 Serialize 项，在 Serialize 项下再创建一个名为 StartupDelaylnMsec 的 32位 DWORD 值 数值数据=0
+关闭系统的引导项
+windows+r-->msconfig-->引导-->无GUI引导 =空-->确定
+关闭视觉性能效果
+高级系统设置-->系统属性-->设置-->自定义-->平滑屏幕字体边缘+，显示缩略图，而不是显示图标+
+关闭任务启动应用程序
+ctrl+shift+esc, 打开任务管理器-->启动-->全选禁用
+
+windows+i,-->系统-->存储-->临时文件-->删除文件
+windows+i,-->系统-->存储-->存储感知=14天 
+关闭虚拟安全功能
+windows+i,-->系统-->内核隔离-->关闭  
+
+ 
+windows+i,-->系统-->通知-->关闭
+windows+i,-->系统-->索引选项-->关闭
+ 
+windows+r-->services.msc-->关闭windows search
+windows+r-->gpedit.msc-->计算机 -->管理模板-->win组件-->更新-->管理最终用户体验-->自动更新关闭
+windows+r-->gpedit.msc-->计算机 -->管理模板-->win组件-->microsoft Defender 防病毒-->仅当计算机处于打开但未使用状态才启动计划扫描
+windows+r-->gpedit.msc-->计算机 -->管理模板-->win组件-->实时保护-->关闭
+临时文件清理
+%TEMP%是Windows系统临时文件的环境变量，直接作为指令执行可以打开当前系统的临时文件夹。许多用户通过删除该文件夹中的文件来清理Windows的临时文件，但实际上这样清理并不彻底，我们可以有更轻松、安全的方法。
+风险程度：低
+具体操作：
+点击开始菜单，输入【运行】，输入【%TEMP%】
+或者键盘快捷键按下 WIN + R，输入【%TEMP%】
+这个文件夹下的文件都是windows的临时文件，可以安全删除。键盘快捷键按下 Ctrl + A，然后右键点击删除，或者快捷shift + Delete。
+----------------------------------
+大文件清理：hiberfil.sys
+风险程度：低
+影响程度：windows10的休眠功能
+hiberfil.sys：它是 windows10的休眠功能，将内存数据与会话数据保存到电脑硬盘、以便于win10断电重新启动后可以快速恢复会话所需的内存镜像文件。在离开计算机一段时间后，计算机将会进入休眠状     态。一般情况它会占用很大存储空间。
+如果平时正常开关机电脑，不使用休眠功能可以关闭它。
+点击左下角开始菜单--输入【cmd】--出现黑板一块：命令提示符，点击【以管理员身份运行】
+弹出的黑色命令提示符中，输入【powercfg -h off 】，回车命令生效后，即可立即释放hiberfil.sys文件空间
+如果后续想使用休眠功能，就用命令【powercfg -h on】
+大文件清理：pagefile.sys
+风险程度：中
+影响程度：系统的虚拟内存
+pagefile.sys系统缓存：它是操作系统的虚拟内存文件，如果你经常运行大型程序，不建议删除。不过他可以移动到其他磁盘。
+右键我的电脑--属性--高级系统设置--标签中选择高级--性能设置--高级--虚拟内存更改
+去掉自动管理所有驱动器分页文件大小的勾勾
+点击C盘，选择--无分页文件
+在选择想要移动的盘符
+选择--自定义大小
+根据下方提示的推荐大小填写
+需要点击设置后生效，点击后D：盘的分页文件大小会变成设置的大小。
+点击确定后，需要重启电脑
+这样就能释放C盘pagefile.sys文件的空间
+---------------------------------------------
+大文件清理：windows.old
+win10本身占用根盘空间并不大，在20G以下，有时候版本改动很大，基本是全新安装，所以会自动生成windows.old目录以便回退。这个目录大约也有10G     左右，强行用右键进行删除，会报系统权限不足，无法删除，可以用上面“系统自带的系统盘清理功能”的操作选中“以前的windows安装”来进行删除。
+转移虚拟内存
+　　“我的电脑”或“此电脑”右键→属性→高级系统设置→高级/性能/设置→高级/虚拟内存→更改：
+
+
+　　把C盘分页文件选中，下面选择“无分页文件”，点“设置”；
+　　选中D盘或其他盘，下面选择“系统管理的大小”，点“设置”；
+　　然后重启电脑。
+4、更改用户文件的保存位置到其他盘
+　　这里默认选择的都是我们的C盘， 我们可以换成其他盘，并且点击后面的应用按钮保存。步骤：
+　　（桌面空白处鼠标右键→显示设置→存储→更多存储设置/更改新内容的保存位置）
+　　这样可以节省C盘空间，而且重装系统也可以减少备份文件的工作量。
+5、转移其他软件的默认存储位置
+　　像电脑版微信和QQ等软件是吃硬盘的大户，我的微信用个把月就吃掉10G左右空间，QQ也会占用以G数的空间，所以把它们的文件保存目录也设置到了D盘。
+　　这是我几个微信占用的空间，每隔一阵就手工删除一次：
+　　微信和QQ转移存储位置的操作步骤如下：
+　　至于其他像OneDrive 、Evernote 、iCloud Drive、迅雷、杀软、驱动精灵等，很多是有缓存目录的，建议相应都设置到系统盘外。
+６、SpaceSniffer查看其他大文件或文件夹
+　　最后再推荐一个绿色小软件SpaceSniffer，仅２M，下载即用，可以帮你直观地查看硬盘里有哪些大文件或大文件夹。通过SpaceSniffer找到隐藏的或是被你遗忘的大文件，再进一步清理。
+　　免费的，可以自行百度搜索，也可以找我私信索取。
+7、通过SpaceSniffer可以发现，Windows、用户目录下的AppData、Program files文件夹是吃硬盘大户
+Program files
+　　这个文件夹不要乱动，是系统或你自己安装的软件。
+Windows文件夹
+　　系统文件夹存放了 Windows 运行所需的几乎所有文件，临时文件、系统备份、系统预读等文件也在包括在其中。
+　　WinSxS文件夹：从你安装那一刻开始，windows都在断断续续地“打补丁”，而这些升级内容和补丁，都安装在了Windows 下的 WinSxS 文件夹。既然是系统补丁，那就不能轻易删除，但其中有一个备份文件夹 Backup ，这里边的内容你是完全可以删除的。
+用户目录下的 AppData 文件夹
+　　你在使用电脑的时候，你的电脑设置、软件设置、使用习惯等等，都被记录在这个文件夹当中。这些设置让你感觉电脑越用越顺手。
+　　AppData 文件夹按照安全级别分为 Local ，Locallow 和 Roaming 三个文件夹。
+　　Local ，就是本地储存，其中有一个文件夹叫做 Temp ，对软件进行安装时，Windows 会帮你存留你安装时解压的源文件，方便下次安装直接调取使用，节省解压时间。但平时这东西很少用到的，很占空间，所以，可以直接删除；
+　　Locallow 文件夹顾名思义就是安全级别比 Local 文件夹 low 一点，假如你的工作环境里还有其他电脑，其他电脑就可能读取本地电脑的用户文件；
+　　Roaming 的意思是漫游，安全级别比前两个还低，这里的数据可以在工作环境的电脑之间漫游；
+　　除了Temp 文件夹外，这三个文件夹中其他文件可以删除吗？除了 Windows 系统自带的内容，这些软件数据文件你都可以删除。只不过删除相应的软件数据，下次在使用该软件的时候，你的电脑就啥也不记得了，虽然这样腾出了大大的空间，不过你还要从头调教它。所以，这个可以自行决定力度。
+8、软件安装在C盘以外的分区
+　　绝大多数软件安装时候都是可以选择位置的，这时候手动选择到其他分区，可以让C盘不那么臃肿。因为软件本身要占用空间，后续使用过程中还会产生各种文件且你还不容易去把它们找出来，不方便清理。
+　　另外，很多软件重装系统后是不需要重新安装也可以使用的，相当于“绿色”版，也会让你省事很多。
+　　要注意的是，现在很多软件安装时候都是来个“全家桶”或者以极不显眼的方式夹带私货，所以不要图省事一路“下一步”，多仔细看一看，有坑就避开。
+　　
