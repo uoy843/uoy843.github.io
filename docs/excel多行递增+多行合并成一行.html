@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>excel多行递增+多行合并成一行</title>
+
+    <style>
+      body{margin:0;background:#0b1222;color:#e5e7eb}
+      .container{max-width:860px;margin:40px auto;padding:28px;background:#0f172a;border-radius:16px;box-shadow:0 20px 60px rgba(0,0,0,.35);border:1px solid rgba(255,255,255,.06)}
+      h1{margin:0 0 12px;font-size:28px}
+      .meta{color:#94a3b8;font-size:14px;margin-bottom:16px}
+      pre{white-space:pre-wrap;word-wrap:break-word;font: 14px/1.7 ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace}
+      p{margin:0 0 1em;line-height:1.9}
+      .content{font-size:16px}
+    </style>
+  
+</head>
+<body>
+  <div class="container">
+    <h1>excel多行递增+多行合并成一行</h1>
+    <div class="meta">通过 TXT→HTML 转换生成 · 2026/8/18 08:01:35</div>
+    <pre class="content">excel多行递增+多行合并成一行
+xlsx 中,比如A1:A100 中,怎样写入递增1,2,..100?
+	在 Excel 中，有几种非常简单且高效的方法可以在 `A1:A100` 区域中快速写入递增的数字（1 到 100）。
+	---
+	### 方法一：使用填充柄（最常用、最直观）
+	1. **输入起始值**：在单元格 `A1` 中输入数字 **`1`**。
+	2. **输入第二个值**（可选，但推荐）：在 `A2` 中输入数字 **`2`**。
+	3. **选中单元格**：选中 `A1` 和 `A2` 两个单元格。
+	4. **向下拖动**：将鼠标指针移到选中区域右下角的填充柄（小方块，称为“十字光标”），按住鼠标左键向下拖动，直到单元格位置到达 `A100` 释放即可。
+	---
+	### 方法二：使用“序列”功能（适合长距离填充）
+	如果你需要填充非常长的区域（比如到 10,000 行），手动拖拽比较麻烦，可以使用内置的“序列”功能：
+	1. 在单元格 **`A1`** 中输入数字 **`1`**。
+	2. 保持选中 `A1` 的状态，点击 Excel 顶部菜单栏的 **“开始”** 选项卡。
+	3. 在右侧的“编辑”组中，找到并点击 **“填充”** $\rightarrow$ **“序列...”**。
+	4. 在弹出的对话框中进行设置：
+	* **序列产生在**：选择 **“列”**。
+	* **步长值**：输入 **`1`**。
+	* **终止值**：输入 **`100`**。
+	5. 点击 **确定**，`A1:A100` 就会瞬间填充好 1 到 100。
+	---
+	### 方法三：使用公式（动态更新）
+	如果你希望这列数字是动态的（如果行数变动，数字能自动调整），可以使用公式：
+	1. 在单元格 `A1` 中输入公式：
+	```excel
+	=ROW()
+	```
+	*(注：`ROW()` 函数返回当前单元格的行号。如果在 `A1` 输入，结果就是 1。)*
+	2. 按回车确认后，将 `A1` 的公式下拉复制到 `A100` 即可。
+	*或者使用经典的序列公式：*
+	在 `A1` 输入 `=ROW(A1)`，然后向下复制到 `A100`。
+------------------
+数据被分散在不同的列中（如 A、B、C 等）。要将这些内容合并成你想要的单行格式,最简单的方法是在 Excel 中使用 &amp; 连接符 或者 CONCATENATE 函数。
+------------------
+	假设你的数据在 A1 到 G1 列中：
+	### 方法一：使用连接符 `&amp;`（最简单）
+	在数据行右侧的空白单元格（例如 H1）中输入以下公式：
+	```excel
+	=A1&amp;B1&amp;C1&amp;D1&amp;E1&amp;F1&amp;G1
+	```
+	* **操作步骤**：
+	1. 在 H1 单元格输入上述公式并按回车。
+	2. H1 就会显示合并后的完整内容。
+	3. 选中 H1 单元格，向下拖动右下角的填充柄，即可快速处理后续行。
+	### 方法二：使用 `TEXTJOIN` 函数（如果你的 Excel 版本较新）  #TEXTJOIN=文字连接
+	如果你的 Excel 版本支持 `TEXTJOIN`（Office 2019 或 Office 365 以上版本），这会更方便，即使中间有空格也不怕：
+	```excel
+	=TEXTJOIN(&quot;&quot;, TRUE, A1:G1)
+	```
+	* **解析**：
+	* `&quot;&quot;`：表示连接时中间不添加任何符号。
+	* `TRUE`：表示如果某列是空的，直接跳过。
+	* `A1:G1`：选中你这一行所有包含数据的区域。
+	### 总结与后续处理
+	1. **复制结果**：完成公式计算后，如果你需要纯文本内容，请选中所有计算出来的 H 列单元格，右键点击“**复制**”。
+	2. **粘贴为值**：然后在原位置右键点击，选择“**粘贴选项**”下的“**123（粘贴为值）**”。这样 H 列就变成了纯文本，你可以直接删除前面的 A-G 列，从而达到“去掉线条（表格结构），只留内容”的效果。
+	--------------------------</pre>
+  </div>
+</body>
+</html>
