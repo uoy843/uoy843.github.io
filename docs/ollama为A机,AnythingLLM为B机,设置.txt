@@ -1,0 +1,146 @@
+-------------
+windows install Ollama
+irm https://ollama.com/install.ps1 | iex
+Download for Windows
+安装 OllamaSetup.exe
+OllamaSetup.exe
+Model location 保存位置: C:\Users\x\.ollama
+-------------
+ollama为A机,AnythingLLM为B机,设置
+ 1.    将 Ollama（A机）作为 AI 引擎，AnythingLLM（B机）作为前端知识库进行分布式部署，核心逻辑是：开启 A 机的局域网访问权限，并在 B 					    机的配置中指向 A 机的 IP 地址。
+ 2.    以下是具体的设置步骤：
+ 3.    ----------------
+ 4.第一步：配置 A 机（Ollama）开放局域网访问
+ 5.  默认情况下，Ollama 只允许本地（`127.0.0.1`）访问。要让 B 机能够连上，需要修改环境变量。
+
+ 6.  如果 A 机是 Windows 系统：
+ 7.    1. 彻底退出 Ollama：在任务栏右下角找到 Ollama 托盘图标，右键选择 Quit Ollama（必须退出，否则环境变量不生效）。
+ 8.    2. 设置环境变量：
+ 9.    	. 按下键盘上的 `Win + R` 键，输入 `sysdm.cpl` 回车。
+10.    	. 点击 高级 选项卡 -> 点击下方的 环境变量。
+11.    	. 在“用户变量”或“系统变量”中，点击 新建：
+12.    		. 变量名：`OLLAMA_HOST`
+13.    		. 变量值：`0.0.0.0`
+14.    	. 点击确定保存。
+15.    3. 重新启动 Ollama：再次打开 Ollama 软件。
+
+16.  如果 A 机是 Linux / macOS 系统：
+17.    . Linux (systemd)：
+18.    		1. 终端执行 `sudo systemctl edit ollama.service`。
+19.    		2. 在打开的空白处添加以下内容：
+20.   			 	```ini
+21.    			[Service]
+22.   	 			Environment="OLLAMA_HOST=0.0.0.0"
+23.    			```
+24.    			```
+25.      		3. 保存退出，然后重启服务：
+26.         			```bash
+27.    			sudo systemctl daemon-reload
+28.    			sudo systemctl restart ollama
+29.    			```
+30.    . macOS：
+31.    	在终端中启动 Ollama 前先执行：`export OLLAMA_HOST=0.0.0.0`，或者将其写入 `~/.zshrc` 中。
+32.    	> 检查 A 机的局域网 IP：
+33.    	> 在 A 机的命令行输入 `ipconfig`（Windows）或 `ifconfig`（Linux/Mac），找到 A 机的局域网 IP（例如 `192.168.1.100`）。
+34.    ---
+35.第二步：配置 B 机（AnythingLLM）连接 A 机
+36.  打开 B 机上的 AnythingLLM，进入配置界面：
+37.   1. 点击左下角的 Settings（设置） -> 选择 LLM Provider（LLM 提供商）。
+38.   2. 在提供商列表中选择 Ollama。
+39.   3. 关键配置：
+40.    . Ollama URL：填入 A 机的局域网地址。格式为 `http://A机的IP:11434`
+41.    	. .例如：`[http://192.168.1.100:11434](http://192.168.1.100:11434).`
+42.   4. 选择模型：在 Model（模型） 下拉菜单中，AnythingLLM 会自动通过网络拉取 A 机上已经下载好的模型（如 `gemma2`、`llama3` 等）。直接选择你想要使用的模型即可。
+43.   5. 点击 Save changes（保存修改）。
+44.  同样的方法，如果你需要在 AnythingLLM 中使用 A 机的 Embedding（向量）模型，可以在 Embedding Provider 里同样选择 Ollama，并填写相同的 URL 地址。
+45.    ---
+46.常见故障排查（如果连接不上）
+47.  检查防火墙（最常见原因）：
+48.    A 机的防火墙可能会拦截 11434 端口。
+49.    	.Windows：需要在“高级安全 Windows 防火墙”中，添加一条入站规则，允许 TCP 端口 11434 的流量通过。
+50.    	.Linux：如果开启了 ufw，执行 `sudo ufw allow 11434/tcp`。
+51.   . 测试连通性：
+52.    	在 B 机的浏览器里直接输入 `http://A机的IP:11434`。如果页面显示 `Ollama is running`，说明网络和局域网配置完全正常，问题出在 AnythingLLM 的文本输入格式上。
+53 . -----------------------------
+54 . 
+55 . 同样的方法，如果你需要在 AnythingLLM 中使用 A 机的 Embedding（向量）模型，可以在 Embedding Provider 里同样选择 Ollama，并填写相同的 URL 地址。？
+56 . 
+57 . 	**是的，完全正确！** 逻辑和配置方法与设置 LLM（大语言模型）一模一样。
+58 . 
+59 . 为了让 AnythingLLM 的向量化（Embedding）功能也由 A 机的 Ollama 来处理，你只需要在 B 机上做如下操作：
+60 . 
+61 . ### 具体设置步骤：
+62 . 
+63 . 1. 打开 B 机的 **AnythingLLM**，点击左下角的 **Settings（设置）**。
+64 . 2. 在左侧菜单中找到 **Embedding Provider（向量模型提供商）**。
+65 . 3. 在右侧的供应商列表中选择 **Ollama**。
+66 . 4. **Ollama URL**：同样填写 A 机的局域网地址，例如：`http://192.168.1.100:11434`。
+67 . 5. **Embedding Model**：在下拉菜单中选择你在 A 机上下载好的向量模型。
+68 . 6. 点击 **Save changes（保存修改）**。
+69 . 
+70 . ---
+71 . 
+72 . ### ⚠️ 关键注意事项（避免踩坑）：
+73 . 
+74 . * **A 机必须下载了专门的 Embedding 模型**：
+75 . 普通的对话模型（如 `llama3`, `qwen2`）虽然也能充当 Embedding，但效率和效果较差。建议在 A 机的命令行中提前拉取一个专用的向量模型。
+76 . * *推荐命令（在 A 机运行）*：`ollama run nomic-embed-text` （这是目前最常用且效果很好的开源文本向量模型）。
+77 . 
+78 . 
+79 . * **为什么两边都要配？**
+80 . * **LLM Provider**：负责“思考和回答问题”。
+81 . * **Embedding Provider**：负责“把你的本地文档（PDF/TXT等）切碎并转化为数学向量”，方便知识库进行检索。
+82 . 
+83 . 
+84 . 
+85 . 只要这两个地方都指向 A 机的 IP，你的 B 机就彻底变成了一个“轻量前端”，所有的计算算力（生成回复 + 文档向量化）都将由 A 机来承担。
+86 . ------------
+87 . Error: embedding models require input text. Usage: ollama run nomic-embed-text "your text here"？
+88 . 
+89 . 出现这个错误，是因为你直接在 A 机的命令行里输入了 `ollama run nomic-embed-text`，而 Ollama 的 **Embedding（向量）模型不支持交互式对话**。
+90 . 
+91 . 普通模型（如 `qwen2`）会进入一个像聊天一样的窗口，但向量模型的作用是“把输入的文字直接变成一串数字（向量）”，所以它要求你在输入命令的同时**必须直接给它一段文字**。
+92 . 
+93 . 但这**完全不影响**你在 B 机上的使用！请按照以下说明处理：
+94 . 
+95 . ### 1. 你现在需要做什么？
+96 . 
+97 . **什么都不用做。** 只要你在 A 机的命令行看到这个错误，其实已经说明 `nomic-embed-text` 模型**已经成功下载到 A 机上了**。
+98 . 
+99 . 因为只有模型下载完成了，Ollama 才会去执行它，进而发现你没有传输入文本，从而报错。
+100. 
+101. ### 2. 在 B 机（AnythingLLM）上直接配置
+102. 
+103. 现在回到 **B 机** 的 AnythingLLM 界面：
+104. 
+105. 1. 刷新一下页面或重新打开设置。
+106. 2. 进入 **Embedding Provider**，填入 A 机的 URL（`http://A机IP:11434`）。
+107. 3. 点击 **Embedding Model** 下拉菜单，你就会发现 `nomic-embed-text` 已经静静地躺在选项里了。直接选中它并保存即可！
+108. 
+109. ---
+110. 
+111. ### 💡 强迫症小测试（如何验证 A 机的向量模型正常工作）
+112. 
+113. 如果你想在 A 机上测试这个模型到底能不能用，你需要像错误提示里写的那样，在后面加上一段用双引号包裹的文字。
+114. 
+115. **在 A 机的命令行输入：**
+116. 
+117. ```bash
+118. ollama run nomic-embed-text "你好，测试向量化"
+119. 
+120. ```
+121. 
+122. **你将会看到类似这样的输出：**
+123. 
+124. ```json
+125. {
+126.   "embedding": [
+127.     0.01234, -0.05678, 0.12345, ... 共 768 个数字 ...
+128.   ]
+129. }
+130. 
+131. ```
+132. 
+133. 看到这串密密麻麻的数字，就说明模型运行完美。AnythingLLM 在上传文档时，会自动在后台把文档发送给 A 机，A 机处理完后就会把类似的数字返回给 B 机。
+134. -------------------------
+ 
