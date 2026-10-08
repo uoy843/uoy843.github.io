@@ -12,6 +12,7 @@
 5.点击 Create repository。
 🚀 步骤 2：上传网页文件
 1.在仓库页面里，点 “Add file” → “Upload files”。
+Add file\Create new file\文件夹名称/xxx.txt #/xxx.txt 加上才能在文件夹中上传文本文件.
 2.上传你的网页文件：
 至少要有一个 index.html（这是网站默认入口）。
 其他的 CSS、图片文件一并上传。
